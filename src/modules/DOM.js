@@ -11,43 +11,111 @@ const DOM = (() => {
     content.appendChild(header);
   }
 
-  function openProjectForm() {
+  function openTaskForm() {
     const form = document.createElement("form");
     const addBtn = _createAddBtn();  
-    const formGroup = document.createElement("div");
-    const input = document.createElement("input");
+    const dueDate = _createDueDate();
+    const taskName = _createTextField("Task Name");
+    const taskNote = _createTextArea("Notes about task");
+    const priority = _createPriority();
       
-    input.setAttribute("placeholder", "Project Name");
+    form.setAttribute("id", "task-form");
 
     function _createAddBtn() {
       const btn = document.createElement("btn");
       btn.textContent = "Add More";
-      btn.addEventListener("click", _addTextField);
+      // btn.addEventListener("click", _addTextField);
       return btn;
     }
 
-    function _addTextField() {
+    function _createTextField(placeholder) {
       const formGroup = document.createElement("div");
       const input = document.createElement("input");
       
-      input.setAttribute("placeholder", "Set a task")
+      input.setAttribute("type", "text");
+      input.setAttribute("placeholder", placeholder);
   
       formGroup.appendChild(input);
-      form.appendChild(formGroup);
+      return formGroup;
     }
-  
-    formGroup.appendChild(input);
-    form.appendChild(formGroup);
-    form.appendChild(addBtn);
-    const initField = _addTextField();
-    content.appendChild(form);
+
+    function _createTextArea(placeholder) {
+      const formGroup = document.createElement("div");
+      const tarea = document.createElement("textarea");
+      
+      tarea.setAttribute("placeholder", placeholder);
+      
+      formGroup.appendChild(tarea);
+      return formGroup;
+    }
+
+    function _createDueDate() {
+      const formGroup = document.createElement("div");
+      const input = document.createElement("input");
+
+      input.setAttribute("type", "date");
+
+      formGroup.appendChild(input);
+      return formGroup;
+    }
+
+    function _createPriority() {
+      const formGroup = document.createElement("div");
+      const low = document.createElement("input");
+      const lowLabel = document.createElement("label");
+      const med = document.createElement("input");
+      const medLabel = document.createElement("label");
+      const high = document.createElement("input");
+      const highLabel = document.createElement("label");
+
+      low.setAttribute("type", "radio");
+      low.setAttribute("name", "priority");
+      low.setAttribute("id", "lowPriority");
+      low.setAttribute("value", "low");
+      lowLabel.setAttribute("for", "lowPriority");
+      lowLabel.textContent = "Low"
+
+      med.setAttribute("type", "radio");
+      med.setAttribute("name", "priority");
+      med.setAttribute("id", "medPriority");
+      med.setAttribute("value", "med");
+      medLabel.setAttribute("for", "medPriority");
+      medLabel.textContent = "Medium"
+
+      high.setAttribute("type", "radio");
+      high.setAttribute("name", "priority");
+      high.setAttribute("id", "highPriority");
+      high.setAttribute("value", "high");
+      highLabel.setAttribute("for", "highPriority");
+      highLabel.textContent = "High"
+
+      formGroup.appendChild(low);
+      formGroup.appendChild(lowLabel);
+      formGroup.appendChild(med);
+      formGroup.appendChild(medLabel);
+      formGroup.appendChild(high);
+      formGroup.appendChild(highLabel);
+
+      return formGroup;;
+    }
+
+    function _renderForm() {
+      form.appendChild(addBtn);
+      form.appendChild(dueDate);
+      form.appendChild(taskName);
+      form.appendChild(taskNote);
+      form.appendChild(priority);
+
+      content.appendChild(form);
+    }
+    _renderForm();
   }
 
 
 
  
   
-  return { createHeader, openProjectForm }
+  return { createHeader, openTaskForm }
 })();
 
 export default DOM;
