@@ -1,0 +1,1 @@
+(()=>{"use strict";(()=>{const e=document.getElementById("content");return{createHeader:function(){const t=document.createElement("header"),n=document.createElement("div");n.textContent="To-Do or Not To-Do",t.appendChild(n),e.appendChild(t)},createForm:function(){}}})().createHeader()})();
