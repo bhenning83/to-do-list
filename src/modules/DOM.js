@@ -1,3 +1,5 @@
+import controller from './controller.js';
+
 const DOM = (() => {
   const content = document.getElementById("content");
 
@@ -11,20 +13,19 @@ const DOM = (() => {
     content.appendChild(header);
   }
 
-  function openTaskForm() {
+  function newTaskForm() {
     const form = document.createElement("form");
-    const addBtn = _createAddBtn();  
-    const dueDate = _createDueDate();
-    const taskName = _createTextField("Task Name");
-    const taskNote = _createTextArea("Notes about task");
-    const priority = _createPriority();
       
     form.setAttribute("id", "task-form");
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      controller.createTask(form);
+    });
 
-    function _createAddBtn() {
+    function _createAddTaskBtn() {
       const btn = document.createElement("btn");
-      btn.textContent = "Add More";
-      // btn.addEventListener("click", _addTextField);
+      btn.textContent = "Add a Task";
+      btn.addEventListener("click", _renderForm);
       return btn;
     }
 
@@ -33,6 +34,7 @@ const DOM = (() => {
       const input = document.createElement("input");
       
       input.setAttribute("type", "text");
+      input.setAttribute("id", "name");
       input.setAttribute("placeholder", placeholder);
   
       formGroup.appendChild(input);
@@ -42,8 +44,9 @@ const DOM = (() => {
     function _createTextArea(placeholder) {
       const formGroup = document.createElement("div");
       const tarea = document.createElement("textarea");
-      
+
       tarea.setAttribute("placeholder", placeholder);
+      tarea.setAttribute("id", "note");
       
       formGroup.appendChild(tarea);
       return formGroup;
@@ -54,6 +57,7 @@ const DOM = (() => {
       const input = document.createElement("input");
 
       input.setAttribute("type", "date");
+      input.setAttribute("id", "duedate")
 
       formGroup.appendChild(input);
       return formGroup;
@@ -99,23 +103,42 @@ const DOM = (() => {
       return formGroup;;
     }
 
+    function _createSubmitBtn() {
+      const btn = document.createElement("button");
+      
+      btn.setAttribute("type", "submit");
+      btn.textContent = "Create";
+
+      return btn;
+    }
+
     function _renderForm() {
-      form.appendChild(addBtn);
+      const dueDate = _createDueDate();
+      const taskName = _createTextField("Task Name");
+      const taskNote = _createTextArea("Notes about task");
+      const priority = _createPriority();
       form.appendChild(dueDate);
       form.appendChild(taskName);
       form.appendChild(taskNote);
       form.appendChild(priority);
-
       content.appendChild(form);
     }
+
+    function _createSubmitBox() {
+      const box = document.createElement("div");
+      const addTaskBtn = _createAddTaskBtn();
+      const submit = _createSubmitBtn();
+
+      box.appendChild(addTaskBtn);
+      box.appendChild(submit);
+      form.appendChild(box);
+    }
+
+    _createSubmitBox();
     _renderForm();
   }
-
-
-
- 
   
-  return { createHeader, openTaskForm }
+  return { createHeader, newTaskForm }
 })();
 
 export default DOM;

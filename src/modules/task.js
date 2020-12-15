@@ -1,8 +1,13 @@
-const task = (name, dueDate, project = "default") => {
-  const note = "";
-  const priority = 0;  
+const Task = (name, dueDate, note, priority, project = "default") => {
 
-  return { name, dueDate, note, priority, project }
+  return { 
+    name, 
+    dueDate, 
+    note, 
+    priority, 
+    project, 
+  }
 }
 
-export default task;
+
+export default Task;
