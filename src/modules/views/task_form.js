@@ -1,25 +1,16 @@
-import controller from './controller.js';
+import TaskController from "../controllers/task_controller";
+import ProjectController from "../controllers/project_controller"
 
-const DOM = (() => {
+const TaskForm = (() => {
   const content = document.getElementById("content");
 
-  function createHeader() {
-    const header = document.createElement("header");
-    const textBox = document.createElement("div");
-
-    textBox.textContent = "To-Do or Not To-Do";
-
-    header.appendChild(textBox);
-    content.appendChild(header);
-  }
-
-  function newTaskForm() {
+  function renderTaskForm() {
     const form = document.createElement("form");
       
     form.setAttribute("id", "task-form");
     form.addEventListener("submit", (e) => {
       e.preventDefault();
-      controller.createTask(form);
+      TaskController.createTask(form);
     });
 
     function _createAddTaskBtn() {
@@ -29,23 +20,23 @@ const DOM = (() => {
       return btn;
     }
 
-    function _createTextField(placeholder) {
+    function _createNameField() {
       const formGroup = document.createElement("div");
       const input = document.createElement("input");
       
       input.setAttribute("type", "text");
       input.setAttribute("id", "name");
-      input.setAttribute("placeholder", placeholder);
+      input.setAttribute("placeholder", "Task Name");
   
       formGroup.appendChild(input);
       return formGroup;
     }
 
-    function _createTextArea(placeholder) {
+    function _createNoteArea() {
       const formGroup = document.createElement("div");
       const tarea = document.createElement("textarea");
 
-      tarea.setAttribute("placeholder", placeholder);
+      tarea.setAttribute("placeholder", "Notes about task");
       tarea.setAttribute("id", "note");
       
       formGroup.appendChild(tarea);
@@ -77,21 +68,21 @@ const DOM = (() => {
       low.setAttribute("id", "lowPriority");
       low.setAttribute("value", "low");
       lowLabel.setAttribute("for", "lowPriority");
-      lowLabel.textContent = "Low"
+      lowLabel.textContent = "Low";
 
       med.setAttribute("type", "radio");
       med.setAttribute("name", "priority");
       med.setAttribute("id", "medPriority");
       med.setAttribute("value", "med");
       medLabel.setAttribute("for", "medPriority");
-      medLabel.textContent = "Medium"
+      medLabel.textContent = "Medium";
 
       high.setAttribute("type", "radio");
       high.setAttribute("name", "priority");
       high.setAttribute("id", "highPriority");
       high.setAttribute("value", "high");
       highLabel.setAttribute("for", "highPriority");
-      highLabel.textContent = "High"
+      highLabel.textContent = "High";
 
       formGroup.appendChild(low);
       formGroup.appendChild(lowLabel);
@@ -101,6 +92,48 @@ const DOM = (() => {
       formGroup.appendChild(highLabel);
 
       return formGroup;;
+    }
+
+    function _createProjectField() {
+      const projects = ProjectController.getAllProjects();
+      const formGroup =    document.createElement("div");
+      const newProj =      document.createElement("input");
+      const newProjLabel = document.createElement("label");
+      const newProjField = document.createElement("input");
+
+      newProj.setAttribute("type", "radio");
+      newProj.setAttribute("id", "newProject");
+      newProjLabel.setAttribute("for", "newProject");
+      newProjLabel.textContent = "New Project";
+      newProjField.setAttribute("type", "text");
+      newProjField.setAttribute("id", "newProjectName");
+      newProjField.setAttribute("placeholder", "New Project Name");
+      newProjField.style.display = "none";
+
+      newProj.addEventListener("click", (e) => {
+        e.preventDefault();
+        newProjField.style.display = "block";
+      });
+      
+      for (let i = 0; i < projects.length; i++) {
+        const proj = document.createElement("input");
+        const projLabel = document.createElement("label");
+        proj.setAttribute("type", "radio");
+        proj.setAttribute("name", "project-select");
+        proj.setAttribute("id", "project-select");
+        proj.setAttribute("value", `${projects[i].name}`);
+        projLabel.setAttribute("for", `${projects[i].name}`);
+        projLabel.textContent = `${projects[i].name}`;
+
+        formGroup.appendChild(proj);
+        formGroup.appendChild(projLabel);
+      }
+
+      formGroup.appendChild(newProj);
+      formGroup.appendChild(newProjLabel);
+      formGroup.appendChild(newProjField)
+
+      return formGroup;
     }
 
     function _createSubmitBtn() {
@@ -113,10 +146,12 @@ const DOM = (() => {
     }
 
     function _renderForm() {
+      const project = _createProjectField();
       const dueDate = _createDueDate();
-      const taskName = _createTextField("Task Name");
-      const taskNote = _createTextArea("Notes about task");
+      const taskName = _createNameField();
+      const taskNote = _createNoteArea();
       const priority = _createPriority();
+      form.appendChild(project);
       form.appendChild(dueDate);
       form.appendChild(taskName);
       form.appendChild(taskNote);
@@ -137,19 +172,8 @@ const DOM = (() => {
     _createSubmitBox();
     _renderForm();
   }
-  
-  function test() {
-    const btn = document.createElement("button");
-    btn.textContent = "test";
 
-    btn.addEventListener("click", (e) => {
-      e.preventDefault();
-      controller.renderAllTasks();
-    })
-
-    content.appendChild(btn);
-  }
-  return { createHeader, newTaskForm, test }
+  return { renderTaskForm }
 })();
 
-export default DOM;
+export default TaskForm;

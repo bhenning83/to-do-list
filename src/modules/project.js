@@ -1,8 +1,8 @@
-import controller from "./controller"
+import controller from "./controllers/task_controller"
 
-const project = (name) => {
+const Project = (name) => {
   return { name }
 }
 
 
-export default project;
+export default Project;

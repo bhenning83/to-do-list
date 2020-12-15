@@ -1,10 +1,8 @@
-import DOM from './modules/DOM';
-import Task from './modules/task';
-import project from './modules/project';
-import controller from './modules/controller';
+import Header from "./modules/views/header"
+import TaskForm from "./modules/views/task_form";
+import Task from "./modules/task";
+import Project from "./modules/project";
+import Controller from "./modules/controllers/task_controller";
 
-DOM.createHeader();
 
-DOM.newTaskForm();
-
-DOM.test();
+TaskForm.renderTaskForm();
