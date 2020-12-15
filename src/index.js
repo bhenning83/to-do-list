@@ -7,3 +7,4 @@ DOM.createHeader();
 
 DOM.newTaskForm();
 
+DOM.test();

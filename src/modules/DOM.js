@@ -138,7 +138,18 @@ const DOM = (() => {
     _renderForm();
   }
   
-  return { createHeader, newTaskForm }
+  function test() {
+    const btn = document.createElement("button");
+    btn.textContent = "test";
+
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      controller.renderAllTasks();
+    })
+
+    content.appendChild(btn);
+  }
+  return { createHeader, newTaskForm, test }
 })();
 
 export default DOM;

@@ -1,4 +1,5 @@
 import Task from './task';
+import {renderTask} from './views/renderTask'
 
 const controller = (() => {
   const allTasks = [];
@@ -19,9 +20,17 @@ const controller = (() => {
 
     let task = Task(name, dueDate, note, priority);
     allTasks.push(task);
+    console.log(task)
   }
 
-  return { allTasks, allProjects, createTask }
+  function renderAllTasks() {
+    for (let i = 0; i < allTasks.length; i++) {
+      let obj = allTasks[i];
+      renderTask(obj);
+    }
+  }
+
+  return { allTasks, allProjects, createTask, renderAllTasks }
 })();
 
 export default controller;

@@ -9,5 +9,4 @@ const Task = (name, dueDate, note, priority, project = "default") => {
   }
 }
 
-
 export default Task;
