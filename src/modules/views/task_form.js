@@ -103,6 +103,7 @@ const TaskForm = (() => {
 
       newProj.setAttribute("type", "radio");
       newProj.setAttribute("id", "newProject");
+      newProj.setAttribute("name", "project-select");
       newProjLabel.setAttribute("for", "newProject");
       newProjLabel.textContent = "New Project";
       newProjField.setAttribute("type", "text");
@@ -111,7 +112,6 @@ const TaskForm = (() => {
       newProjField.style.display = "none";
 
       newProj.addEventListener("click", (e) => {
-        e.preventDefault();
         newProjField.style.display = "block";
       });
       
@@ -120,7 +120,6 @@ const TaskForm = (() => {
         const projLabel = document.createElement("label");
         proj.setAttribute("type", "radio");
         proj.setAttribute("name", "project-select");
-        proj.setAttribute("id", "project-select");
         proj.setAttribute("value", `${projects[i].name}`);
         projLabel.setAttribute("for", `${projects[i].name}`);
         projLabel.textContent = `${projects[i].name}`;
@@ -133,7 +132,7 @@ const TaskForm = (() => {
       formGroup.appendChild(newProjLabel);
       formGroup.appendChild(newProjField)
 
-      return formGroup;
+      form.appendChild(formGroup);
     }
 
     function _createSubmitBtn() {
@@ -146,12 +145,10 @@ const TaskForm = (() => {
     }
 
     function _renderForm() {
-      const project = _createProjectField();
       const dueDate = _createDueDate();
       const taskName = _createNameField();
       const taskNote = _createNoteArea();
       const priority = _createPriority();
-      form.appendChild(project);
       form.appendChild(dueDate);
       form.appendChild(taskName);
       form.appendChild(taskNote);
@@ -170,9 +167,16 @@ const TaskForm = (() => {
     }
 
     _createSubmitBox();
+    _createProjectField();
     _renderForm();
   }
 
+  const test = document.createElement("button");
+  test.textContent = "show tasks";
+  test.addEventListener("click", (e) => {
+    TaskController.test();
+  })
+  content.appendChild(test);
   return { renderTaskForm }
 })();
 

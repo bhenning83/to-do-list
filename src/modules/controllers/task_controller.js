@@ -1,4 +1,5 @@
 import Task from "../task";
+import {renderTask} from "../views/renderTask"
 
 const TaskController = (() => {
   const allTasks = [];
@@ -19,11 +20,12 @@ const TaskController = (() => {
     }
 
     //project name is equal to selected project, or name entered in new project text field
-    for (let i = 0; i < projectRadios; i++) {
-      if (projectRadios[i].checked) {
-        project = projectRadios[i].value;
-      } else if (form.newProject.check) {
+    for (let i = 0; i < projectRadios.length; i++) {
+      if (form.newProject.checked) {
+        console.log(form.newProjectName)
         project = form.newProjectName.value;
+      } else if (projectRadios[i].checked) {
+        project = projectRadios[i].value;
       }
     }
 
@@ -43,7 +45,13 @@ const TaskController = (() => {
     return projTasks;
   }
 
-  return { allTasks, createTask, getProjectTasks }
+  function test() {
+    for (let i = 0; i < allTasks.length; i++) {
+      renderTask(allTasks[i]);
+    }
+  }
+
+  return { allTasks, createTask, getProjectTasks, test }
 })();
 
 export default TaskController;
