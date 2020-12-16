@@ -1,12 +1,16 @@
 import Task from "../task";
 import renderTask from "../views/renderTask";
 import ProjectController from "./project_controller"
+import TaskForm from "../views/task_form"
 
 const TaskController = (() => {
   const allTasks = [];
 
-  function createTask(form, counter) {
+
+  function createTask(counter) {
+    const form = document.getElementById("task-form");
     let project = _getSelectedProject(form);
+    console.log(form)
 
     //iterate through each task made for given project
     for (let i = 0; i < counter; i++) {
@@ -46,7 +50,6 @@ const TaskController = (() => {
     const projTasks = [];
     for (let i = 0; i < allTasks.length; i++) {
       let obj = allTasks[i];
-      console.log(obj["project"])
       if (obj["project"] == project) {
         projTasks.push(obj);
       }

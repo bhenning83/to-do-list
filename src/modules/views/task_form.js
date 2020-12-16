@@ -2,17 +2,21 @@ import TaskController from "../controllers/task_controller";
 import ProjectController from "../controllers/project_controller"
 
 const TaskForm = (() => {
-  let counter = 0;
   const content = document.getElementById("content");
-
+  
   function renderTaskForm() {
     const form = document.createElement("form");
+
+    let counter = 0;
+    
       
     form.setAttribute("id", "task-form");
+
     form.addEventListener("submit", (e) => {
       e.preventDefault();
-      TaskController.createTask(form, counter);
-      form.reset();
+      TaskController.createTask(counter);
+      form.remove();
+      renderTaskForm();
     });
 
     function _createAddTaskBtn() {
@@ -146,6 +150,16 @@ const TaskForm = (() => {
       return btn;
     }
 
+    function _createHiddenCount() {
+      const count = document.createElement("input");
+
+      count.setAttribute("type", "hidden");
+      count.setAttribute("id", "count");
+      count.setAttribute("value", 0);
+
+      return count;
+    }
+
     function _renderForm() {
       const dueDate = _createDueDate();
       const taskName = _createNameField();
@@ -155,6 +169,7 @@ const TaskForm = (() => {
       form.appendChild(taskName);
       form.appendChild(taskNote);
       form.appendChild(priority);
+      
       content.appendChild(form);
       counter++;
     }
@@ -178,7 +193,7 @@ const TaskForm = (() => {
   test.textContent = "show tasks";
   test.addEventListener("click", (e) => {
     TaskController.test();
-    
+
   });
   content.appendChild(test);
   return { renderTaskForm }

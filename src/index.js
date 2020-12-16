@@ -6,9 +6,9 @@ import TaskController from "./modules/controllers/task_controller";
 import ProjectController from "./modules/controllers/project_controller";
 import Home from "./modules/views/home"
 
-TaskForm.renderTaskForm();
+Header.createHeader();
 
-Home.renderHome();
+Home.render();
 
 
 
