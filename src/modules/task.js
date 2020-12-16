@@ -1,4 +1,4 @@
-const Task = (name, dueDate, note, priority, project = "default") => {
+const Task = (name, dueDate, note, priority, project = "Free Spirited") => {
 
   return { 
     name, 

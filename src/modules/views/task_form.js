@@ -2,6 +2,7 @@ import TaskController from "../controllers/task_controller";
 import ProjectController from "../controllers/project_controller"
 
 const TaskForm = (() => {
+  let counter = 0;
   const content = document.getElementById("content");
 
   function renderTaskForm() {
@@ -10,7 +11,8 @@ const TaskForm = (() => {
     form.setAttribute("id", "task-form");
     form.addEventListener("submit", (e) => {
       e.preventDefault();
-      TaskController.createTask(form);
+      TaskController.createTask(form, counter);
+      form.reset();
     });
 
     function _createAddTaskBtn() {
@@ -25,7 +27,7 @@ const TaskForm = (() => {
       const input = document.createElement("input");
       
       input.setAttribute("type", "text");
-      input.setAttribute("id", "name");
+      input.setAttribute("id", "name" + counter);
       input.setAttribute("placeholder", "Task Name");
   
       formGroup.appendChild(input);
@@ -37,7 +39,7 @@ const TaskForm = (() => {
       const tarea = document.createElement("textarea");
 
       tarea.setAttribute("placeholder", "Notes about task");
-      tarea.setAttribute("id", "note");
+      tarea.setAttribute("id", "note" + counter);
       
       formGroup.appendChild(tarea);
       return formGroup;
@@ -48,7 +50,7 @@ const TaskForm = (() => {
       const input = document.createElement("input");
 
       input.setAttribute("type", "date");
-      input.setAttribute("id", "duedate")
+      input.setAttribute("id", "duedate" + counter)
 
       formGroup.appendChild(input);
       return formGroup;
@@ -64,24 +66,24 @@ const TaskForm = (() => {
       const highLabel = document.createElement("label");
 
       low.setAttribute("type", "radio");
-      low.setAttribute("name", "priority");
-      low.setAttribute("id", "lowPriority");
+      low.setAttribute("name", "priority" + counter);
+      low.setAttribute("id", "lowPriority" + counter);
       low.setAttribute("value", "low");
-      lowLabel.setAttribute("for", "lowPriority");
+      lowLabel.setAttribute("for", "lowPriority" + counter);
       lowLabel.textContent = "Low";
 
       med.setAttribute("type", "radio");
-      med.setAttribute("name", "priority");
-      med.setAttribute("id", "medPriority");
+      med.setAttribute("name", "priority" + counter);
+      med.setAttribute("id", "medPriority" + counter);
       med.setAttribute("value", "med");
-      medLabel.setAttribute("for", "medPriority");
+      medLabel.setAttribute("for", "medPriority" + counter);
       medLabel.textContent = "Medium";
 
       high.setAttribute("type", "radio");
-      high.setAttribute("name", "priority");
-      high.setAttribute("id", "highPriority");
+      high.setAttribute("name", "priority" + counter);
+      high.setAttribute("id", "highPriority" + counter);
       high.setAttribute("value", "high");
-      highLabel.setAttribute("for", "highPriority");
+      highLabel.setAttribute("for", "highPriority" + counter);
       highLabel.textContent = "High";
 
       formGroup.appendChild(low);
@@ -154,6 +156,7 @@ const TaskForm = (() => {
       form.appendChild(taskNote);
       form.appendChild(priority);
       content.appendChild(form);
+      counter++;
     }
 
     function _createSubmitBox() {
@@ -175,7 +178,8 @@ const TaskForm = (() => {
   test.textContent = "show tasks";
   test.addEventListener("click", (e) => {
     TaskController.test();
-  })
+    
+  });
   content.appendChild(test);
   return { renderTaskForm }
 })();
