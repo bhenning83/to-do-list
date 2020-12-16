@@ -46,6 +46,7 @@ const TaskController = (() => {
     const projTasks = [];
     for (let i = 0; i < allTasks.length; i++) {
       let obj = allTasks[i];
+      console.log(obj["project"])
       if (obj["project"] == project) {
         projTasks.push(obj);
       }

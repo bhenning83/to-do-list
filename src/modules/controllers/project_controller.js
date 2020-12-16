@@ -16,10 +16,9 @@ const ProjectController = (() => {
   }
 
   function renderAllProjects() {
-    console.log(allProjects)
     for (let i = 0; i < allProjects.length; i++) {
       const proj = allProjects[i];
-      const allTasks = TaskController.getProjectTasks(proj);
+      const allTasks = TaskController.getProjectTasks(proj.name);
       RenderProject.render(proj, allTasks)
     }
   }
