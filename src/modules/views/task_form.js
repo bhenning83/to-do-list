@@ -1,10 +1,9 @@
 import TaskController from "../controllers/task_controller";
-import ProjectController from "../controllers/project_controller"
 
 const TaskForm = (() => {
   const content = document.getElementById("content");
   
-  function renderTaskForm() {
+  function render() {
     const form = document.createElement("form");
 
     form.setAttribute("id", "task-form");
@@ -136,7 +135,7 @@ const TaskForm = (() => {
 
   });
   content.appendChild(test);
-  return { renderTaskForm }
+  return { render }
 })();
 
 export default TaskForm;

@@ -2,13 +2,24 @@ import Project from "../project";
 import TaskController from "./task_controller";
 import RenderProject from "../views/renderProject";
 import Clear from "../views/clear"
+import ProjectForm from "../views/project_form"
 
 const ProjectController = (() => {
   const allProjects = [];
 
-  function createNewProject(name) {
+  function createNewProject(form) {
+    const name = form["new-project"].value;
     const proj = Project(name);
     allProjects.push(proj);
+  }
+
+  function createNewProjectForm() {
+    ProjectForm.render();
+  }
+
+  function formSubmit(form) {
+    createNewProject(form);
+    console.log(allProjects)
   }
   
   function getAllProjects() {
@@ -24,7 +35,12 @@ const ProjectController = (() => {
     }
   }
 
-  return { createNewProject, getAllProjects, renderAllProjects }
+  return { 
+    createNewProject, 
+    getAllProjects, 
+    renderAllProjects, 
+    createNewProjectForm, 
+    formSubmit }
 })();
 
 export default ProjectController;
