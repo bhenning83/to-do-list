@@ -7,43 +7,21 @@ const TaskController = (() => {
   const allTasks = [];
 
 
-  function createTask(counter) {
+  function createTask(project) {
     const form = document.getElementById("task-form");
-    let project = _getSelectedProject(form);
-    console.log(form)
 
-    //iterate through each task made for given project
-    for (let i = 0; i < counter; i++) {
-      let name =    form["name" + i].value;
-      let dueDate = form["duedate" + i].value;
-      let note =    form["note" + i].value;
-      let priority = "";
-      let priorityRadios = document.getElementsByName("priority" + i);
-      
-      for (let i = 0; i < priorityRadios.length; i++) {
-        if (priorityRadios[i].checked) {
-          priority = priorityRadios[i].value;
-        }
-      }
-      let task = Task(name, dueDate, note, priority, project);
-      allTasks.push(task);
-    }
-  }
-
-  function _getSelectedProject(form) {
-    const projectRadios = document.getElementsByName("project-select");
-    let project = "";
-
-    //project name is set as selected project, or name entered in new project text field
-    for (let i = 0; i < projectRadios.length; i++) {
-      if (form.newProject.checked) {
-        project = form.newProjectName.value;
-        ProjectController.createNewProject(project);
-      } else if (projectRadios[i].checked) {
-        project = projectRadios[i].value;
+    let name =    form["name"].value;
+    let dueDate = form["duedate"].value;
+    let note =    form["note"].value;
+    let priority = "";
+    
+    for (let i = 0; i < priorityRadios.length; i++) {
+      if (priorityRadios[i].checked) {
+        priority = priorityRadios[i].value;
       }
     }
-    return project;
+    let task = Task(name, dueDate, note, priority, project);
+    allTasks.push(task);
   }
 
   function getProjectTasks(project) {
@@ -63,7 +41,7 @@ const TaskController = (() => {
 
   function test() {
     for (let i = 0; i < allTasks.length; i++) {
-      renderTask.render(allTasks[i]);
+      RenderTask.complete(allTasks[i]);
     }
   }
 

@@ -1,5 +1,7 @@
 import ProjectController from "../controllers/project_controller";
 import TaskController from "../controllers/task_controller"
+import RenderTask from "./renderTask";
+
 
 const RenderProject = (() => {
   const content = document.getElementById("content");
@@ -10,21 +12,12 @@ const RenderProject = (() => {
 
     projName.textContent = proj.name;
     projBox.appendChild(projName);
+    projBox.setAttribute("class", "project-box");
 
     for (let i = 0; i < allTasks.length; i++) {
-      const taskName = document.createElement("div");
-      const dueDate = document.createElement("div");
-      const checkBox = document.createElement("div");
-
-      checkBox.classList.add("check-box");
-
-      taskName.textContent = allTasks[i].name;
-      console.log(allTasks[i].name);
-      dueDate.textContent = allTasks[i].dueDate;
+      const taskBox = RenderTask.abv(allTasks[i]);
+      projBox.appendChild(taskBox);
       
-      projBox.appendChild(checkBox);
-      projBox.appendChild(taskName);
-      projBox.appendChild(dueDate);
     }
     content.appendChild(projBox);
   }

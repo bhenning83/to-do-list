@@ -7,17 +7,7 @@ const TaskForm = (() => {
   function renderTaskForm() {
     const form = document.createElement("form");
 
-    let counter = 0;
-    
-      
     form.setAttribute("id", "task-form");
-
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      TaskController.createTask(counter);
-      form.remove();
-      renderTaskForm();
-    });
 
     function _createAddTaskBtn() {
       const btn = document.createElement("btn");
@@ -100,47 +90,6 @@ const TaskForm = (() => {
       return formGroup;;
     }
 
-    function _createProjectField() {
-      const projects = ProjectController.getAllProjects();
-      const formGroup =    document.createElement("div");
-      const newProj =      document.createElement("input");
-      const newProjLabel = document.createElement("label");
-      const newProjField = document.createElement("input");
-
-      newProj.setAttribute("type", "radio");
-      newProj.setAttribute("id", "newProject");
-      newProj.setAttribute("name", "project-select");
-      newProjLabel.setAttribute("for", "newProject");
-      newProjLabel.textContent = "New Project";
-      newProjField.setAttribute("type", "text");
-      newProjField.setAttribute("id", "newProjectName");
-      newProjField.setAttribute("placeholder", "New Project Name");
-      newProjField.style.display = "none";
-
-      newProj.addEventListener("click", (e) => {
-        newProjField.style.display = "block";
-      });
-      
-      for (let i = 0; i < projects.length; i++) {
-        const proj = document.createElement("input");
-        const projLabel = document.createElement("label");
-        proj.setAttribute("type", "radio");
-        proj.setAttribute("name", "project-select");
-        proj.setAttribute("value", `${projects[i].name}`);
-        projLabel.setAttribute("for", `${projects[i].name}`);
-        projLabel.textContent = `${projects[i].name}`;
-
-        formGroup.appendChild(proj);
-        formGroup.appendChild(projLabel);
-      }
-
-      formGroup.appendChild(newProj);
-      formGroup.appendChild(newProjLabel);
-      formGroup.appendChild(newProjField)
-
-      form.appendChild(formGroup);
-    }
-
     function _createSubmitBtn() {
       const btn = document.createElement("button");
       
@@ -148,16 +97,6 @@ const TaskForm = (() => {
       btn.textContent = "Create";
 
       return btn;
-    }
-
-    function _createHiddenCount() {
-      const count = document.createElement("input");
-
-      count.setAttribute("type", "hidden");
-      count.setAttribute("id", "count");
-      count.setAttribute("value", 0);
-
-      return count;
     }
 
     function _renderForm() {
@@ -171,7 +110,6 @@ const TaskForm = (() => {
       form.appendChild(priority);
       
       content.appendChild(form);
-      counter++;
     }
 
     function _createSubmitBox() {
@@ -182,12 +120,14 @@ const TaskForm = (() => {
       box.appendChild(addTaskBtn);
       box.appendChild(submit);
       form.appendChild(box);
+
     }
 
     _createSubmitBox();
-    _createProjectField();
     _renderForm();
   }
+
+ 
 
   const test = document.createElement("button");
   test.textContent = "show tasks";

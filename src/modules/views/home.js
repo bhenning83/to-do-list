@@ -5,7 +5,6 @@ const Home = (() => {
   const content = document.getElementById("content");
   
   function render() {
-    TaskForm.renderTaskForm();
     ProjectController.renderAllProjects();
   }
 
