@@ -3,24 +3,22 @@ import TaskController from "../controllers/task_controller";
 const TaskForm = (() => {
   const content = document.getElementById("content");
   
-  function render() {
+  function render(proj) {
     const form = document.createElement("form");
 
     form.setAttribute("id", "task-form");
 
-    function _createAddTaskBtn() {
-      const btn = document.createElement("btn");
-      btn.textContent = "Add a Task";
-      btn.addEventListener("click", _renderForm);
-      return btn;
-    }
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      TaskController.formSubmit(form);
+    })
 
     function _createNameField() {
       const formGroup = document.createElement("div");
       const input = document.createElement("input");
       
       input.setAttribute("type", "text");
-      input.setAttribute("id", "name" + counter);
+      input.setAttribute("id", "name");
       input.setAttribute("placeholder", "Task Name");
   
       formGroup.appendChild(input);
@@ -32,7 +30,7 @@ const TaskForm = (() => {
       const tarea = document.createElement("textarea");
 
       tarea.setAttribute("placeholder", "Notes about task");
-      tarea.setAttribute("id", "note" + counter);
+      tarea.setAttribute("id", "note");
       
       formGroup.appendChild(tarea);
       return formGroup;
@@ -43,7 +41,7 @@ const TaskForm = (() => {
       const input = document.createElement("input");
 
       input.setAttribute("type", "date");
-      input.setAttribute("id", "duedate" + counter)
+      input.setAttribute("id", "duedate")
 
       formGroup.appendChild(input);
       return formGroup;
@@ -59,24 +57,24 @@ const TaskForm = (() => {
       const highLabel = document.createElement("label");
 
       low.setAttribute("type", "radio");
-      low.setAttribute("name", "priority" + counter);
-      low.setAttribute("id", "lowPriority" + counter);
+      low.setAttribute("name", "priority");
+      low.setAttribute("id", "lowPriority");
       low.setAttribute("value", "low");
-      lowLabel.setAttribute("for", "lowPriority" + counter);
+      lowLabel.setAttribute("for", "lowPriority");
       lowLabel.textContent = "Low";
 
       med.setAttribute("type", "radio");
-      med.setAttribute("name", "priority" + counter);
-      med.setAttribute("id", "medPriority" + counter);
+      med.setAttribute("name", "priority");
+      med.setAttribute("id", "medPriority");
       med.setAttribute("value", "med");
-      medLabel.setAttribute("for", "medPriority" + counter);
+      medLabel.setAttribute("for", "medPriority");
       medLabel.textContent = "Medium";
 
       high.setAttribute("type", "radio");
-      high.setAttribute("name", "priority" + counter);
-      high.setAttribute("id", "highPriority" + counter);
+      high.setAttribute("name", "priority");
+      high.setAttribute("id", "highPriority");
       high.setAttribute("value", "high");
-      highLabel.setAttribute("for", "highPriority" + counter);
+      highLabel.setAttribute("for", "highPriority");
       highLabel.textContent = "High";
 
       formGroup.appendChild(low);
@@ -98,32 +96,41 @@ const TaskForm = (() => {
       return btn;
     }
 
+    function _createProjectField() {
+      const input = document.createElement("input");
+      input.setAttribute("type", "hidden");
+      input.setAttribute("id", "project");
+      input.setAttribute("value", proj["name"]);
+      
+      return input;
+    }
+
     function _renderForm() {
       const dueDate = _createDueDate();
       const taskName = _createNameField();
       const taskNote = _createNoteArea();
       const priority = _createPriority();
+      const project = _createProjectField();
       form.appendChild(dueDate);
       form.appendChild(taskName);
       form.appendChild(taskNote);
       form.appendChild(priority);
+      form.appendChild(project);
       
       content.appendChild(form);
     }
 
     function _createSubmitBox() {
       const box = document.createElement("div");
-      const addTaskBtn = _createAddTaskBtn();
       const submit = _createSubmitBtn();
 
-      box.appendChild(addTaskBtn);
       box.appendChild(submit);
       form.appendChild(box);
 
     }
 
-    _createSubmitBox();
     _renderForm();
+    _createSubmitBox();
   }
 
  

@@ -19,7 +19,8 @@ const ProjectController = (() => {
 
   function formSubmit(form) {
     createNewProject(form);
-    console.log(allProjects)
+    renderAllProjects();
+    form.reset();
   }
   
   function getAllProjects() {

@@ -6,14 +6,14 @@ import TaskForm from "../views/task_form"
 const TaskController = (() => {
   const allTasks = [];
 
-
-  function createTask(project) {
-    const form = document.getElementById("task-form");
-
+  function createTask(form) {
     let name =    form["name"].value;
     let dueDate = form["duedate"].value;
     let note =    form["note"].value;
+    let project = form["project"].value;
     let priority = "";
+
+    const priorityRadios = document.getElementsByName("priority");
     
     for (let i = 0; i < priorityRadios.length; i++) {
       if (priorityRadios[i].checked) {
@@ -22,6 +22,16 @@ const TaskController = (() => {
     }
     let task = Task(name, dueDate, note, priority, project);
     allTasks.push(task);
+  }
+
+  function openTaskForm(proj) {
+    TaskForm.render(proj);
+  }
+
+  function formSubmit(form) {
+    createTask(form)
+    form.remove();
+    ProjectController.renderAllProjects();
   }
 
   function getProjectTasks(project) {
@@ -45,7 +55,14 @@ const TaskController = (() => {
     }
   }
 
-  return { getAllTasks, createTask, getProjectTasks, test }
+  return { 
+    getAllTasks, 
+    createTask, 
+    getProjectTasks, 
+    test, 
+    openTaskForm, 
+    formSubmit
+  }
 })();
 
 export default TaskController;
