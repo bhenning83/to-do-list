@@ -1,6 +1,7 @@
 const Clear = (() => {
   function clearProjects() {
-    const projects = document.getElementsByClassName("project-box");
+    let projects = document.querySelectorAll(".project-box");
+    console.log(projects.length)
     for (let i = 0; i < projects.length; i++) {
       projects[i].remove();
     }
