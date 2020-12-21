@@ -35,16 +35,9 @@ const ProjectController = (() => {
     for (let i = 0; i < allProjects.length; i++) {
       const proj = allProjects[i];
       const allTasks = TaskController.getProjectTasks(proj.name);
-      RenderProject.render(proj, allTasks, i);
+      const taskForm = TaskController.makeTaskForm(proj, i);
+      RenderProject.render(proj, allTasks, taskForm, i);
     }
-  }
-
-  function renderProjectWithTaskForm(form, idx) {
-    const projBox = document.querySelector(".order-" + idx);
-    const proj = allProjects[idx];
-    const allTasks = TaskController.getProjectTasks(proj.name);
-    Clear.clearProject(projBox);
-    RenderProject.render(proj, allTasks, idx, form);
   }
 
   return { 
@@ -53,7 +46,6 @@ const ProjectController = (() => {
     renderAllProjects,
     createNewProjectForm, 
     formSubmit,
-    renderProjectWithTaskForm
    }
 })();
 

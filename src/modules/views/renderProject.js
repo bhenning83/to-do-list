@@ -7,7 +7,7 @@ const RenderProject = (() => {
   const content = document.getElementById("content");
   const row = document.createElement("div");
 
-  function render(proj, allTasks, idx, form = undefined) {
+  function render(proj, allTasks, taskForm, idx) {
     const projBox = document.createElement("div");
     const projName = document.createElement("h4");
     const newTask = document.createElement("div");
@@ -25,8 +25,7 @@ const RenderProject = (() => {
     newTask.setAttribute("class", "p-2");
     newTask.setAttribute("class", "add-task");
     newTask.addEventListener("click", (e) => {
-      e.preventDefault();
-      TaskController.openTaskForm(proj, idx);
+      taskForm.classList.toggle("task-form");
     })
 
     for (let i = 0; i < allTasks.length; i++) {
@@ -34,11 +33,9 @@ const RenderProject = (() => {
       projBox.appendChild(taskBox);
     }
 
-    if (form == undefined) {
-      projBox.appendChild(newTask);
-    } else {
-      projBox.appendChild(form);
-    }
+    projBox.appendChild(newTask);
+
+    projBox.appendChild(taskForm);
 
     row.appendChild(projBox);
 

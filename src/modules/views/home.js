@@ -4,8 +4,8 @@ const Home = (() => {
   const content = document.getElementById("content");
   
   function render() {
-    ProjectController.renderAllProjects();
     ProjectController.createNewProjectForm();
+    ProjectController.renderAllProjects();
   }
 
   return { render };

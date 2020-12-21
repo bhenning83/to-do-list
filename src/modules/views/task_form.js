@@ -2,11 +2,12 @@ import ProjectController from "../controllers/project_controller";
 import TaskController from "../controllers/task_controller";
 
 const TaskForm = (() => {
-  function render(proj, idx) {
+  function create(proj, idx) {
     const form = document.createElement("form");
 
-    form.setAttribute("id", "task-form");
+    form.setAttribute("id", "task-form" + idx);
     form.classList.add("order-" + idx);
+    form.classList.add("task-form");
 
     form.addEventListener("submit", (e) => {
       e.preventDefault();
@@ -27,10 +28,11 @@ const TaskForm = (() => {
 
     function _createNoteArea() {
       const formGroup = document.createElement("div");
-      const tarea = document.createElement("textarea");
+      const tarea = document.createElement("input");
 
       tarea.setAttribute("placeholder", "Notes about task");
       tarea.setAttribute("id", "note");
+      tarea.setAttribute("type", "textarea");
       
       formGroup.appendChild(tarea);
       return formGroup;
@@ -97,27 +99,28 @@ const TaskForm = (() => {
     }
 
     function _createProjectField() {
+      const formGroup = document.createElement("div")
       const input = document.createElement("input");
       input.setAttribute("type", "hidden");
       input.setAttribute("id", "project");
       input.setAttribute("value", proj["name"]);
+
+      formGroup.appendChild(input);
       
-      return input;
+      return formGroup;
     }
 
     function _renderForm() {
       const dueDate = _createDueDate();
       const taskName = _createNameField();
       const taskNote = _createNoteArea();
-      const priority = _createPriority();
       const project = _createProjectField();
-      form.appendChild(dueDate);
+      const priority = _createPriority();
       form.appendChild(taskName);
+      form.appendChild(dueDate);
       form.appendChild(taskNote);
-      form.appendChild(priority);
       form.appendChild(project);
-      
-      ProjectController.renderProjectWithTaskForm(form, idx);
+      form.appendChild(priority);
     }
 
     function _createSubmitBox() {
@@ -126,14 +129,15 @@ const TaskForm = (() => {
 
       box.appendChild(submit);
       form.appendChild(box);
-
     }
 
     _renderForm();
     _createSubmitBox();
+
+    return form;
   }
   
-  return { render }
+  return { create }
 })();
 
 export default TaskForm;

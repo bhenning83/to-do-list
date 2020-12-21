@@ -19,3 +19,6 @@ body {
   justify-content: center;
   align-items: center;
 }
+.task-form {
+  display: none;
+}

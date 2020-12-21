@@ -7,10 +7,10 @@ const TaskController = (() => {
   const allTasks = [];
 
   function createTask(form) {
-    let name =    form["name"].value;
-    let dueDate = form["duedate"].value;
-    let note =    form["note"].value;
-    let project = form["project"].value;
+    let name =    form.getElementsByTagName("input")[0].value;
+    let dueDate = form.getElementsByTagName("input")[1].value;
+    let note =    form.getElementsByTagName("input")[2].value;
+    let project = form.getElementsByTagName("input")[3].value;
     let priority = "";
 
     const priorityRadios = document.getElementsByName("priority");
@@ -24,13 +24,13 @@ const TaskController = (() => {
     allTasks.push(task);
   }
 
-  function openTaskForm(proj, idx) {
-    TaskForm.render(proj, idx);
+  function makeTaskForm(proj, idx) {
+    const form = TaskForm.create(proj, idx);
+    return form;
   }
 
   function formSubmit(form) {
-    createTask(form)
-    form.remove();
+    createTask(form);
     ProjectController.renderAllProjects();
   }
 
@@ -60,7 +60,7 @@ const TaskController = (() => {
     createTask, 
     getProjectTasks, 
     test, 
-    openTaskForm, 
+    makeTaskForm, 
     formSubmit
   }
 })();
