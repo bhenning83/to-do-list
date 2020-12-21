@@ -22,3 +22,31 @@ body {
 .task-form {
   display: none;
 }
+.check-box {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 1rem;
+  border: 1px solid var(--white-root);
+  margin-right: 0.5rem;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.checkmark {
+  position: absolute;
+  background: var(--white-root);
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 0.7rem;
+  display: none;
+}
+.task-box {
+  display: flex;
+  align-items: center;
+}
+.task-contents {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
