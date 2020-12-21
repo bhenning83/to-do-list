@@ -1,13 +1,16 @@
 const Clear = (() => {
-  function clearProjects() {
+  function clearAllProjects() {
     let projects = document.querySelectorAll(".project-box");
-    console.log(projects.length)
     for (let i = 0; i < projects.length; i++) {
       projects[i].remove();
     }
   }
+
+  function clearProject(proj) {
+    proj.remove();
+  }
   
-  return { clearProjects }
+  return { clearAllProjects, clearProject }
 })();
 
 export default Clear

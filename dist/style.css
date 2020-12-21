@@ -1,0 +1,21 @@
+:root {
+  --black-root: #011627ff;
+  --white-root: #fdfffcff;
+  --blue-tiffany: #2ec4b6ff;
+  --red-rose: #e71d36ff;
+  --orange-peel: #ff9f1cff;
+}
+
+body {
+  background: var(--black-root);
+  color: var(--white-root)
+}
+
+.add-task {
+  border: 1px solid var(--white-root);
+  border-radius: 5px;
+  width: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -24,8 +24,8 @@ const TaskController = (() => {
     allTasks.push(task);
   }
 
-  function openTaskForm(proj) {
-    TaskForm.render(proj);
+  function openTaskForm(proj, idx) {
+    TaskForm.render(proj, idx);
   }
 
   function formSubmit(form) {

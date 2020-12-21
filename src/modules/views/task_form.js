@@ -1,12 +1,12 @@
+import ProjectController from "../controllers/project_controller";
 import TaskController from "../controllers/task_controller";
 
 const TaskForm = (() => {
-  const content = document.getElementById("content");
-  
-  function render(proj) {
+  function render(proj, idx) {
     const form = document.createElement("form");
 
     form.setAttribute("id", "task-form");
+    form.classList.add("order-" + idx);
 
     form.addEventListener("submit", (e) => {
       e.preventDefault();
@@ -117,7 +117,7 @@ const TaskForm = (() => {
       form.appendChild(priority);
       form.appendChild(project);
       
-      content.appendChild(form);
+      ProjectController.renderProjectWithTaskForm(form, idx);
     }
 
     function _createSubmitBox() {
@@ -132,16 +132,7 @@ const TaskForm = (() => {
     _renderForm();
     _createSubmitBox();
   }
-
- 
-
-  const test = document.createElement("button");
-  test.textContent = "show tasks";
-  test.addEventListener("click", (e) => {
-    TaskController.test();
-
-  });
-  content.appendChild(test);
+  
   return { render }
 })();
 
