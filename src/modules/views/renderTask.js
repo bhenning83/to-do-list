@@ -1,3 +1,5 @@
+import TaskController from "../controllers/task_controller";
+
 const RenderTask = (() => {
   const content = document.getElementById("content");
 
@@ -22,20 +24,35 @@ const RenderTask = (() => {
   }
 
   function abv(obj) {
-    const taskName = document.createElement("div");
-    const dueDate =  document.createElement("div");
-    const checkBox = document.createElement("div");
-    const taskBox =  document.createElement("div");
+    const taskName =     document.createElement("div");
+    const dueDate =      document.createElement("div");
+    const checkBox =     document.createElement("div");
+    const taskBox =      document.createElement("div");
+    const taskContents = document.createElement("div");
+    const checkMark =    document.createElement("div");
 
     checkBox.classList.add("check-box");
+    taskBox.classList.add("task-box");
+    taskContents.classList.add("task-contents");
+    checkMark.classList.add("checkmark");
 
     taskName.textContent = obj["name"];
+
     dueDate.textContent = obj["dueDate"];
 
-    taskBox.appendChild(checkBox);
-    taskBox.appendChild(taskName);
-    taskBox.appendChild(dueDate);
+    checkBox.addEventListener("click", (e) => {
+      e.preventDefault();
+      checkMark.style.display = "block";
+      setTimeout(function() {
+        TaskController.taskCheckedOff(obj);
+      }, 700);
+    });
 
+    taskContents.appendChild(taskName);
+    taskContents.appendChild(dueDate);
+    checkBox.appendChild(checkMark);
+    taskBox.appendChild(checkBox);
+    taskBox.appendChild(taskContents);
     return taskBox;
   }
 

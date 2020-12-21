@@ -49,19 +49,20 @@ const TaskController = (() => {
     return allTasks;
   }
 
-  function test() {
-    for (let i = 0; i < allTasks.length; i++) {
-      RenderTask.complete(allTasks[i]);
-    }
+  function taskCheckedOff(task) {
+    const idx = allTasks.indexOf(task);
+    allTasks.splice(idx, 1); //removes task from task list
+    ProjectController.renderAllProjects();
   }
+ 
 
   return { 
     getAllTasks, 
     createTask, 
     getProjectTasks, 
-    test, 
     makeTaskForm, 
-    formSubmit
+    formSubmit,
+    taskCheckedOff
   }
 })();
 
