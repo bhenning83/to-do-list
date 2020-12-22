@@ -93,7 +93,7 @@ const TaskForm = (() => {
       const btn = document.createElement("button");
       
       btn.setAttribute("type", "submit");
-      btn.textContent = "Create";
+      btn.textContent = "Add";
 
       return btn;
     }

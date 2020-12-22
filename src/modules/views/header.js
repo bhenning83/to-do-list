@@ -2,7 +2,7 @@ const Header = (() => {
   function createHeader() {
     const content = document.getElementById("content")
     const header = document.createElement("header");
-    const textBox = document.createElement("div");
+    const textBox = document.createElement("h1");
     
     textBox.textContent = "To-Do or Not To-Do";
     header.classList.add("text-center");

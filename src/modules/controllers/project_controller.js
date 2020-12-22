@@ -11,9 +11,12 @@ const ProjectController = (() => {
   const allProjects = [project1, project2];
 
   function createNewProject(form) {
-    const name = form["new-project"].value;
-    const proj = Project(name);
-    allProjects.push(proj);
+    const name = form["new-project"].value.trim();
+    //prevents empty or leading white space submissions
+    if (name) {
+      const proj = Project(name);
+      allProjects.push(proj);
+    }
   }
 
   function createNewProjectForm() {
@@ -40,12 +43,20 @@ const ProjectController = (() => {
     }
   }
 
+  function editProject(proj, dom, idx) {
+    let projBox = dom.parentNode;
+    Clear.clearProject(dom);
+    allProjects.slice(idx, 1);
+    ProjectForm.edit(proj, idx, projBox);
+  }
+
   return { 
     createNewProject, 
     getAllProjects, 
     renderAllProjects,
     createNewProjectForm, 
     formSubmit,
+    editProject
    }
 })();
 

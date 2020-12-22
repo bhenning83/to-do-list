@@ -6,7 +6,7 @@ import RenderTask from "./renderTask";
 const RenderProject = (() => {
   const content = document.getElementById("content");
   const row = document.createElement("div");
-
+  
   function render(proj, allTasks, taskForm, idx) {
     const projBox = document.createElement("div");
     const projName = document.createElement("h4");
@@ -19,6 +19,7 @@ const RenderProject = (() => {
     projBox.classList.add("project-box");
     projBox.classList.add("col-12");
     projBox.classList.add("order-" + idx);
+    projBox.classList.add("projBox-" + idx);
     projBox.appendChild(projName);
     
     newTask.textContent = "+";
@@ -32,6 +33,11 @@ const RenderProject = (() => {
       const taskBox = RenderTask.abv(allTasks[i]);
       projBox.appendChild(taskBox);
     }
+
+    projName.addEventListener("click", (e) => {
+      e.preventDefault();
+      ProjectController.editProject(proj, projName, idx);
+    });
 
     projBox.appendChild(newTask);
 
