@@ -1,44 +1,54 @@
 import TaskController from "../controllers/task_controller";
+import Task from "../task";
 
 const RenderTask = (() => {
-  const content = document.getElementById("content");
 
-  function complete(obj) {
-    const container = document.createElement("div");
-    const name =      document.createElement("div");
-    const date =      document.createElement("div");
-    const note =      document.createElement("div");
-    const project =   document.createElement("div");
-  
-    name.textContent =    obj["name"];
-    date.textContent =    obj["dueDate"];
-    note.textContent =    obj["note"];
-    project.textContent = obj["project"];
-  
-    container.appendChild(name);
-    container.appendChild(date);
-    container.appendChild(note);
-    container.appendChild(project);
-  
-    content.appendChild(container);
+  function render(obj) {
+    const taskName =         document.createElement("div");
+    const dueDate =          document.createElement("div");
+    const taskBox =          document.createElement("div");
+    const taskContents =     document.createElement("div");
+    const nameDateBox =      document.createElement("div");
+    const nameDateCheckBox = document.createElement("div");
+    const note =             document.createElement("div");
+    const checkBox =         createCheckBox(obj);
+    
+    taskBox.classList.add("task-box");
+    nameDateBox.classList.add("name-date-box");
+    taskContents.classList.add("task-contents");
+    nameDateCheckBox.classList.add("d-flex");
+    nameDateCheckBox.classList.add("align-items-center");
+    
+    taskName.textContent = obj["name"];
+    dueDate.textContent = obj["dueDate"];
+    note.textContent = obj["note"];
+
+    note.classList.add("task-note");
+    note.classList.add("show-task-note");
+    
+    nameDateBox.addEventListener("click", (e) => {
+      e.preventDefault();
+      note.classList.toggle("show-task-note");
+    })
+
+    nameDateBox.appendChild(taskName);
+    nameDateBox.appendChild(dueDate);
+    nameDateCheckBox.appendChild(checkBox);
+    nameDateCheckBox.appendChild(nameDateBox);
+    taskContents.appendChild(nameDateBox);
+    taskContents.appendChild(note);
+    taskBox.appendChild(nameDateCheckBox);
+    taskBox.appendChild(taskContents);
+
+    return taskBox;
   }
 
-  function abv(obj) {
-    const taskName =     document.createElement("div");
-    const dueDate =      document.createElement("div");
-    const checkBox =     document.createElement("div");
-    const taskBox =      document.createElement("div");
-    const taskContents = document.createElement("div");
+  function createCheckBox(obj) {
+    const checkBox = document.createElement("div");
     const checkMark =    document.createElement("div");
 
     checkBox.classList.add("check-box");
-    taskBox.classList.add("task-box");
-    taskContents.classList.add("task-contents");
     checkMark.classList.add("checkmark");
-
-    taskName.textContent = obj["name"];
-
-    dueDate.textContent = obj["dueDate"];
 
     checkBox.addEventListener("click", (e) => {
       e.preventDefault();
@@ -48,15 +58,12 @@ const RenderTask = (() => {
       }, 700);
     });
 
-    taskContents.appendChild(taskName);
-    taskContents.appendChild(dueDate);
     checkBox.appendChild(checkMark);
-    taskBox.appendChild(checkBox);
-    taskBox.appendChild(taskContents);
-    return taskBox;
+
+    return checkBox;
   }
 
-  return { complete, abv }
+  return { render }
 })();
 
 export default RenderTask

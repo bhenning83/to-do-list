@@ -43,11 +43,16 @@ const ProjectController = (() => {
     }
   }
 
-  function editProject(proj, dom, idx) {
+  function editProject(proj, dom) {
     let projBox = dom.parentNode;
     Clear.clearProject(dom);
-    allProjects.slice(idx, 1);
-    ProjectForm.edit(proj, idx, projBox);
+    ProjectForm.edit(proj, projBox);
+  }
+
+  function editSubmit(form, proj) {
+    let newName = form.newName.value;
+    proj.name = newName;
+    renderAllProjects();
   }
 
   return { 
@@ -56,7 +61,8 @@ const ProjectController = (() => {
     renderAllProjects,
     createNewProjectForm, 
     formSubmit,
-    editProject
+    editProject,
+    editSubmit
    }
 })();
 

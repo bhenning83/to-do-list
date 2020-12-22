@@ -4,7 +4,11 @@ import ProjectController from "./project_controller"
 import TaskForm from "../views/task_form"
 
 const TaskController = (() => {
-  const allTasks = [];
+  //create test tasks
+  const task1 = Task("Task Name", "2020-12-20", "A note about the task", "low", "Project 1");
+  const task2 = Task("Task Name 2", "2020-12-20", "Another note about the task", "high", "Project 1");
+
+  const allTasks = [task1, task2];
 
   function createTask(form) {
     let name =    form.getElementsByTagName("input")[0].value;
@@ -12,7 +16,8 @@ const TaskController = (() => {
     let note =    form.getElementsByTagName("input")[2].value;
     let project = form.getElementsByTagName("input")[3].value;
     let priority = "";
-
+    
+    console.log(project);
     const priorityRadios = document.getElementsByName("priority");
     
     for (let i = 0; i < priorityRadios.length; i++) {

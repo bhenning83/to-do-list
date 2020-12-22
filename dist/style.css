@@ -43,10 +43,20 @@ body {
 }
 .task-box {
   display: flex;
-  align-items: center;
 }
 .task-contents {
   display: flex;
+  flex-direction: column;
+  width: 100%
+}
+.name-date-box {
+  display: flex;
   justify-content: space-between;
   width: 100%;
+}
+#all-proj-box {
+  flex-direction: column-reverse;
+}
+.show-task-note {
+  display: none;
 }

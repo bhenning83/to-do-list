@@ -6,6 +6,7 @@ import RenderTask from "./renderTask";
 const RenderProject = (() => {
   const content = document.getElementById("content");
   const row = document.createElement("div");
+  row.setAttribute("id", "all-proj-box")
   
   function render(proj, allTasks, taskForm, idx) {
     const projBox = document.createElement("div");
@@ -30,13 +31,13 @@ const RenderProject = (() => {
     })
 
     for (let i = 0; i < allTasks.length; i++) {
-      const taskBox = RenderTask.abv(allTasks[i]);
+      const taskBox = RenderTask.render(allTasks[i]);
       projBox.appendChild(taskBox);
     }
 
     projName.addEventListener("click", (e) => {
       e.preventDefault();
-      ProjectController.editProject(proj, projName, idx);
+      ProjectController.editProject(proj, projName);
     });
 
     projBox.appendChild(newTask);
