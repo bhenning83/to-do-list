@@ -1,6 +1,6 @@
 import Project from "../project";
 import TaskController from "./task_controller";
-import RenderProject from "../views/renderProject";
+import RenderProject from "../views/render_project";
 import Clear from "../views/clear"
 import ProjectForm from "../views/project_form"
 

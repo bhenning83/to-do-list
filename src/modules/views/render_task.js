@@ -4,20 +4,19 @@ import Task from "../task";
 const RenderTask = (() => {
 
   function render(obj) {
+    const taskBox =          document.createElement("div");
     const taskName =         document.createElement("div");
     const dueDate =          document.createElement("div");
-    const taskBox =          document.createElement("div");
-    const taskContents =     document.createElement("div");
     const nameDateBox =      document.createElement("div");
     const nameDateCheckBox = document.createElement("div");
     const note =             document.createElement("div");
     const checkBox =         createCheckBox(obj);
+    const editBtn =          createEditBtn(obj, taskBox);
     
     taskBox.classList.add("task-box");
     nameDateBox.classList.add("name-date-box");
-    taskContents.classList.add("task-contents");
-    nameDateCheckBox.classList.add("d-flex");
-    nameDateCheckBox.classList.add("align-items-center");
+    nameDateCheckBox.classList.add("name-date-check-box");
+    taskName.classList.add("mr-auto")
     
     taskName.textContent = obj["name"];
     dueDate.textContent = obj["dueDate"];
@@ -29,16 +28,27 @@ const RenderTask = (() => {
     nameDateBox.addEventListener("click", (e) => {
       e.preventDefault();
       note.classList.toggle("show-task-note");
-    })
+    });
+
+    switch (obj["priority"]) {
+      case "high":
+        taskName.classList.add("high-pri");
+        break;
+      case "med":
+        taskName.classList.add("med-pri");
+        break;
+      case "low":
+        taskName.classList.add("low-pri");
+        break;
+    }
 
     nameDateBox.appendChild(taskName);
+    nameDateBox.appendChild(editBtn);
     nameDateBox.appendChild(dueDate);
     nameDateCheckBox.appendChild(checkBox);
     nameDateCheckBox.appendChild(nameDateBox);
-    taskContents.appendChild(nameDateBox);
-    taskContents.appendChild(note);
     taskBox.appendChild(nameDateCheckBox);
-    taskBox.appendChild(taskContents);
+    taskBox.appendChild(note);
 
     return taskBox;
   }
@@ -61,6 +71,19 @@ const RenderTask = (() => {
     checkBox.appendChild(checkMark);
 
     return checkBox;
+  }
+
+  function createEditBtn(obj, taskBox) {
+    const btn = document.createElement("i");
+    btn.classList.add("fa");
+    btn.classList.add("fa-pencil-square-o");
+    btn.classList.add("mr-2");
+
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      TaskController.editTask(obj, taskBox)
+    })
+    return btn
   }
 
   return { render }

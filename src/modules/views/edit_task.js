@@ -1,18 +1,13 @@
-import ProjectController from "../controllers/project_controller";
-import TaskController from "../controllers/task_controller";
-
-const TaskForm = (() => {
-  function create(proj, idx) {
+import TaskController from "../controllers/task_controller"
+const EditTask = (() => {
+  function render(obj, dom) {
     const form = document.createElement("form");
 
-    form.setAttribute("id", "task-form" + idx);
-    form.classList.add("order-" + idx);
-    form.classList.add("new-task-form");
     form.classList.add("task-form");
 
     form.addEventListener("submit", (e) => {
       e.preventDefault();
-      TaskController.formSubmit(form);
+      TaskController.editFormSubmit(form, obj);
     })
 
     function _createNameField() {
@@ -20,8 +15,9 @@ const TaskForm = (() => {
       const input = document.createElement("input");
       
       input.setAttribute("type", "text");
-      input.setAttribute("id", "name");
-      input.setAttribute("placeholder", "Task Name");
+      input.setAttribute("id", "newName");
+      input.setAttribute("placeholder", "Edit Task Name");
+      input.setAttribute("value", obj.name);
   
       formGroup.appendChild(input);
       return formGroup;
@@ -32,8 +28,9 @@ const TaskForm = (() => {
       const tarea = document.createElement("input");
 
       tarea.setAttribute("placeholder", "Notes about task");
-      tarea.setAttribute("id", "note");
+      tarea.setAttribute("id", "newNote");
       tarea.setAttribute("type", "textarea");
+      tarea.setAttribute("value", obj.note);
       
       formGroup.appendChild(tarea);
       return formGroup;
@@ -44,7 +41,8 @@ const TaskForm = (() => {
       const input = document.createElement("input");
 
       input.setAttribute("type", "date");
-      input.setAttribute("id", "duedate")
+      input.setAttribute("id", "newDueDate")
+      input.setAttribute("value", obj.dueDate)
 
       formGroup.appendChild(input);
       return formGroup;
@@ -60,25 +58,37 @@ const TaskForm = (() => {
       const highLabel = document.createElement("label");
 
       low.setAttribute("type", "radio");
-      low.setAttribute("name", "priority");
+      low.setAttribute("name", "newPriority");
       low.setAttribute("id", "lowPriority");
       low.setAttribute("value", "low");
       lowLabel.setAttribute("for", "lowPriority");
       lowLabel.textContent = "Low";
 
       med.setAttribute("type", "radio");
-      med.setAttribute("name", "priority");
+      med.setAttribute("name", "newPriority");
       med.setAttribute("id", "medPriority");
       med.setAttribute("value", "med");
       medLabel.setAttribute("for", "medPriority");
       medLabel.textContent = "Medium";
 
       high.setAttribute("type", "radio");
-      high.setAttribute("name", "priority");
+      high.setAttribute("name", "newPriority");
       high.setAttribute("id", "highPriority");
       high.setAttribute("value", "high");
       highLabel.setAttribute("for", "highPriority");
       highLabel.textContent = "High";
+
+      switch (obj.priority) {
+        case "high":
+          high.setAttribute("checked", true);
+          break;
+        case "med":
+          med.setAttribute("checked", true);
+          break;
+        case "low":
+          low.setAttribute("checked", true);
+          break;
+      }
 
       formGroup.appendChild(low);
       formGroup.appendChild(lowLabel);
@@ -94,34 +104,9 @@ const TaskForm = (() => {
       const btn = document.createElement("button");
       
       btn.setAttribute("type", "submit");
-      btn.textContent = "Add";
+      btn.textContent = "Edit";
 
       return btn;
-    }
-
-    function _createProjectField() {
-      const formGroup = document.createElement("div")
-      const input = document.createElement("input");
-      input.setAttribute("type", "hidden");
-      input.setAttribute("id", "project");
-      input.setAttribute("value", proj["name"]);
-
-      formGroup.appendChild(input);
-      
-      return formGroup;
-    }
-
-    function _renderForm() {
-      const dueDate = _createDueDate();
-      const taskName = _createNameField();
-      const taskNote = _createNoteArea();
-      const project = _createProjectField();
-      const priority = _createPriority();
-      form.appendChild(taskName);
-      form.appendChild(dueDate);
-      form.appendChild(taskNote);
-      form.appendChild(project);
-      form.appendChild(priority);
     }
 
     function _createSubmitBox() {
@@ -132,13 +117,23 @@ const TaskForm = (() => {
       form.appendChild(box);
     }
 
+    function _renderForm() {
+      const dueDate = _createDueDate();
+      const taskName = _createNameField();
+      const taskNote = _createNoteArea();
+      const priority = _createPriority();
+      form.appendChild(taskName);
+      form.appendChild(dueDate);
+      form.appendChild(taskNote);
+      form.appendChild(priority);
+      _createSubmitBox();
+      dom.appendChild(form);
+    }
+    
     _renderForm();
-    _createSubmitBox();
-
-    return form;
   }
-  
-  return { create }
+
+  return { render }
 })();
 
-export default TaskForm;
+export default EditTask

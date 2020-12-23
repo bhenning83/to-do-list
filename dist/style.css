@@ -15,11 +15,12 @@ body {
   border: 1px solid var(--white-root);
   border-radius: 5px;
   width: 2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  text-align: center;
+  line-height: 20px;
+  height: 1.5rem;
+  margin: .5rem 0;
 }
-.task-form {
+.new-task-form {
   display: none;
 }
 .check-box {
@@ -41,22 +42,40 @@ body {
   border-radius: 0.7rem;
   display: none;
 }
-.task-box {
-  display: flex;
-}
-.task-contents {
-  display: flex;
-  flex-direction: column;
-  width: 100%
-}
 .name-date-box {
   display: flex;
-  justify-content: space-between;
   width: 100%;
+  align-items: center;
 }
 #all-proj-box {
   flex-direction: column-reverse;
 }
 .show-task-note {
   display: none;
+}
+.name-date-check-box {
+  display: flex;
+  align-items: center;
+  width: 100%
+}
+.task-note {
+  margin-left: 2rem;
+}
+.high-pri {
+  color: var(--red-rose);
+}
+.med-pri {
+  color: var(--orange-peel);
+}
+.low-pri {
+  color: var(--blue-tiffany);
+}
+.task-form label:nth-of-type(1) {
+  color: var(--blue-tiffany);
+}
+.task-form label:nth-of-type(2) {
+  color: var(--orange-peel);
+}
+.task-form label:nth-of-type(3) {
+  color: var(--red-rose);
 }

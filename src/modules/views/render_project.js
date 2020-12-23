@@ -1,6 +1,6 @@
 import ProjectController from "../controllers/project_controller";
 import TaskController from "../controllers/task_controller"
-import RenderTask from "./renderTask";
+import RenderTask from "./render_task";
 
 
 const RenderProject = (() => {
@@ -13,21 +13,21 @@ const RenderProject = (() => {
     const projName = document.createElement("h4");
     const newTask = document.createElement("div");
     
-    row.setAttribute("class", "row");
+    row.classList.add("row");
 
     projName.textContent = proj.name;
     
     projBox.classList.add("project-box");
     projBox.classList.add("col-12");
+    projBox.classList.add("my-2");
     projBox.classList.add("order-" + idx);
     projBox.classList.add("projBox-" + idx);
     projBox.appendChild(projName);
     
     newTask.textContent = "+";
-    newTask.setAttribute("class", "p-2");
-    newTask.setAttribute("class", "add-task");
+    newTask.classList.add("add-task");
     newTask.addEventListener("click", (e) => {
-      taskForm.classList.toggle("task-form");
+      taskForm.classList.toggle("new-task-form");
     })
 
     for (let i = 0; i < allTasks.length; i++) {

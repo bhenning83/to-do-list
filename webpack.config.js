@@ -6,4 +6,25 @@ module.exports = {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
   },
+  module:{
+    rules:[
+        {
+            test: /\.js$/,
+            use: {
+                loader: 'babel-loader',
+                options:{
+                    presets: ['@babel/preset-react']
+                }
+            } 
+        },
+        {
+            test: /\.(sass|scss|css)$/,
+            use: ['style-loader','css-loader','sass-loader']
+        },
+        {
+            test: /\.(svg|eot|woff|woff2|ttf)$/,
+            use: ['file-loader']
+        }
+    ]
+  }, 
 };

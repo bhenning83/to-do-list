@@ -9,8 +9,18 @@ const Clear = (() => {
   function clearProject(proj) {
     proj.remove();
   }
+
+  function clearTask(nodes) {
+   for (let i = nodes.length - 1; i >= 0; i--) {
+     nodes[i].remove();
+   }
+  }
   
-  return { clearAllProjects, clearProject }
+  return { 
+    clearAllProjects, 
+    clearProject, 
+    clearTask 
+  }
 })();
 
 export default Clear

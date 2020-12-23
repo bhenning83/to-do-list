@@ -1,9 +1,9 @@
 import ProjectController from "../controllers/project_controller";
 
 const ProjectForm = (() => {
-  const content =   document.getElementById("content");
-
+  
   function render() {
+    const content =   document.getElementById("content");
     const form =      document.createElement("form");
     const formGroup = document.createElement("div");
     const input =     document.createElement("input");

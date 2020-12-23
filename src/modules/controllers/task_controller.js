@@ -1,7 +1,10 @@
 import Task from "../task";
-import renderTask from "../views/renderTask";
+import renderTask from "../views/render_task";
 import ProjectController from "./project_controller"
 import TaskForm from "../views/task_form"
+import Clear from "../views/clear";
+import EditTask from "../views/edit_task"
+import ProjectForm from "../views/project_form";
 
 const TaskController = (() => {
   //create test tasks
@@ -17,7 +20,6 @@ const TaskController = (() => {
     let project = form.getElementsByTagName("input")[3].value;
     let priority = "";
     
-    console.log(project);
     const priorityRadios = document.getElementsByName("priority");
     
     for (let i = 0; i < priorityRadios.length; i++) {
@@ -60,6 +62,30 @@ const TaskController = (() => {
     ProjectController.renderAllProjects();
   }
  
+  function editTask(obj, dom) {
+    const nodes = dom.children;
+    Clear.clearTask(nodes);
+    console.log(dom)
+    EditTask.render(obj, dom);
+  }
+
+  function editFormSubmit(form, obj) {
+    obj.name = form.newName.value;
+    obj.dueDate = form.newDueDate.value;
+    obj.note = form.newNote.value;
+    obj.priority = form.newNote.value;
+    let priority = "";
+    
+    const priorityRadios = document.getElementsByName("newPriority");
+    
+    for (let i = 0; i < priorityRadios.length; i++) {
+      if (priorityRadios[i].checked) {
+        priority = priorityRadios[i].value;
+      }
+    }
+    obj.priority = priority;
+    ProjectController.renderAllProjects();
+  }
 
   return { 
     getAllTasks, 
@@ -67,7 +93,9 @@ const TaskController = (() => {
     getProjectTasks, 
     makeTaskForm, 
     formSubmit,
-    taskCheckedOff
+    taskCheckedOff,
+    editTask,
+    editFormSubmit
   }
 })();
 
