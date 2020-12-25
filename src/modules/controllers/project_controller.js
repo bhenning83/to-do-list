@@ -6,9 +6,8 @@ import ProjectForm from "../views/project_form"
 
 const ProjectController = (() => {
   //testing projects
-  const project1 = Project("Project 1");
-  const project2 = Project("Project 2");
-  const allProjects = [project1, project2];
+  const project1 = Project("Free Spirited Tasks");
+  const allProjects = [project1];
 
   function createNewProject(form) {
     const name = form["new-project"].value.trim();

@@ -13,18 +13,23 @@ const TaskController = (() => {
 
   const allTasks = [task1, task2];
 
-  function createTask(form) {
-    let name =    form.getElementsByTagName("input")[0].value;
-    let dueDate = form.getElementsByTagName("input")[1].value;
-    let note =    form.getElementsByTagName("input")[2].value;
-    let project = form.getElementsByTagName("input")[3].value;
+  function createTask(form, idx) {
+    let name =    form.querySelector(".task-name input").value;
+    let dueDate = form.querySelector(".task-date input").value;
+    let note =    form.querySelector(".task-note textarea").value;
+    let project = form.querySelector(".task-project input").value;
+    let low =     form.querySelector(".pri-boxes .pri-box:nth-of-type(1) input");
+    let med =     form.querySelector(".pri-boxes .pri-box:nth-of-type(2) input");
+    let high =    form.querySelector(".pri-boxes .pri-box:nth-of-type(3) input");
+    let radios = [];
     let priority = "";
     
-    const priorityRadios = document.getElementsByName("priority");
+    radios.push(low, med, high)
+    console.log(radios)
     
-    for (let i = 0; i < priorityRadios.length; i++) {
-      if (priorityRadios[i].checked) {
-        priority = priorityRadios[i].value;
+    for (let i = 0; i < radios.length; i++) {
+      if (radios[i].checked) {
+        priority = radios[i].value;
       }
     }
     let task = Task(name, dueDate, note, priority, project);
@@ -76,11 +81,11 @@ const TaskController = (() => {
     obj.priority = form.newNote.value;
     let priority = "";
     
-    const priorityRadios = document.getElementsByName("newPriority");
+    const radios = document.getElementsByName("newPriority");
     
-    for (let i = 0; i < priorityRadios.length; i++) {
-      if (priorityRadios[i].checked) {
-        priority = priorityRadios[i].value;
+    for (let i = 0; i < radios.length; i++) {
+      if (radios[i].checked) {
+        priority = radios[i].value;
       }
     }
     obj.priority = priority;

@@ -52,10 +52,13 @@ const EditTask = (() => {
       const formGroup = document.createElement("div");
       const low = document.createElement("input");
       const lowLabel = document.createElement("label");
+      const lowBox = document.createElement("div");
       const med = document.createElement("input");
       const medLabel = document.createElement("label");
+      const medBox = document.createElement("div");
       const high = document.createElement("input");
       const highLabel = document.createElement("label");
+      const highBox = document.createElement("div");
 
       low.setAttribute("type", "radio");
       low.setAttribute("name", "newPriority");
@@ -90,12 +93,16 @@ const EditTask = (() => {
           break;
       }
 
-      formGroup.appendChild(low);
-      formGroup.appendChild(lowLabel);
-      formGroup.appendChild(med);
-      formGroup.appendChild(medLabel);
-      formGroup.appendChild(high);
-      formGroup.appendChild(highLabel);
+      lowBox.appendChild(low);
+      lowBox.appendChild(lowLabel);
+      formGroup.appendChild(lowBox);
+      medBox.appendChild(med);
+      medBox.appendChild(medLabel);
+      formGroup.appendChild(medBox);
+      highBox.appendChild(high);
+      highBox.appendChild(highLabel);
+      formGroup.appendChild(highBox);
+
 
       return formGroup;;
     }
