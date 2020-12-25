@@ -4,8 +4,8 @@ import TaskController from "../controllers/task_controller";
 const TaskForm = (() => {
   function create(proj, idx) {
     const form = document.createElement("form");
-    const noteBox = document.createElement("div");
 
+    const noteBox = document.createElement("div");
     noteBox.classList.add("col-12");
 
     form.setAttribute("id", "task-form" + idx);
@@ -22,12 +22,11 @@ const TaskForm = (() => {
     function _createNameField() {
       const formGroup = document.createElement("div");
       const input = document.createElement("input");
-
-      formGroup.classList.add("task-name");
       
       input.setAttribute("type", "text");
       input.setAttribute("placeholder", "Task Name");
-  
+      
+      formGroup.classList.add("task-name");
       formGroup.appendChild(input);
       return formGroup;
     }
@@ -123,7 +122,7 @@ const TaskForm = (() => {
 
       formGroup.classList.add("pri-boxes")
 
-      return formGroup;;
+      return formGroup;
     }
 
     function _createSubmitBtn() {

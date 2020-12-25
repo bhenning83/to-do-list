@@ -3,7 +3,13 @@ const EditTask = (() => {
   function render(obj, dom) {
     const form = document.createElement("form");
 
+    const noteBox = document.createElement("div");
+    noteBox.classList.add("col-12");
+
+    form.setAttribute("id", "edit-form-" + obj.name);
+    form.classList.add("edit-task-form");
     form.classList.add("task-form");
+    form.classList.add("row");
 
     form.addEventListener("submit", (e) => {
       e.preventDefault();
@@ -18,21 +24,9 @@ const EditTask = (() => {
       input.setAttribute("id", "newName");
       input.setAttribute("placeholder", "Edit Task Name");
       input.setAttribute("value", obj.name);
-  
-      formGroup.appendChild(input);
-      return formGroup;
-    }
-
-    function _createNoteArea() {
-      const formGroup = document.createElement("div");
-      const tarea = document.createElement("input");
-
-      tarea.setAttribute("placeholder", "Notes about task");
-      tarea.setAttribute("id", "newNote");
-      tarea.setAttribute("type", "textarea");
-      tarea.setAttribute("value", obj.note);
       
-      formGroup.appendChild(tarea);
+      formGroup.classList.add("task-name");
+      formGroup.appendChild(input);
       return formGroup;
     }
 
@@ -44,9 +38,24 @@ const EditTask = (() => {
       input.setAttribute("id", "newDueDate")
       input.setAttribute("value", obj.dueDate)
 
+      formGroup.classList.add("task-date");
       formGroup.appendChild(input);
       return formGroup;
     }
+
+    function _createNoteArea() {
+      const formGroup = document.createElement("div");
+      const tarea = document.createElement("textarea");
+
+      tarea.setAttribute("placeholder", "Notes about task");
+      tarea.setAttribute("form", "edit-form-" + obj.name);
+      tarea.classList.add("w-100");
+
+      formGroup.classList.add("task-note")
+      formGroup.appendChild(tarea);
+      return formGroup;
+    }
+    
 
     function _createPriority() {
       const formGroup = document.createElement("div");
@@ -60,23 +69,29 @@ const EditTask = (() => {
       const highLabel = document.createElement("label");
       const highBox = document.createElement("div");
 
+      lowBox.classList.add("low-box");
+      lowBox.classList.add("pri-box");
+      medBox.classList.add("med-box");
+      medBox.classList.add("pri-box");
+      medBox.classList.add("mx-3");
+      highBox.classList.add("high-box");
+      highBox.classList.add("pri-box");
+      formGroup.classList.add("d-flex")
+
       low.setAttribute("type", "radio");
-      low.setAttribute("name", "newPriority");
-      low.setAttribute("id", "lowPriority");
+      low.setAttribute("name", "priority");
       low.setAttribute("value", "low");
       lowLabel.setAttribute("for", "lowPriority");
       lowLabel.textContent = "Low";
 
       med.setAttribute("type", "radio");
-      med.setAttribute("name", "newPriority");
-      med.setAttribute("id", "medPriority");
+      med.setAttribute("name", "priority");
       med.setAttribute("value", "med");
       medLabel.setAttribute("for", "medPriority");
       medLabel.textContent = "Medium";
 
       high.setAttribute("type", "radio");
-      high.setAttribute("name", "newPriority");
-      high.setAttribute("id", "highPriority");
+      high.setAttribute("name", "priority");
       high.setAttribute("value", "high");
       highLabel.setAttribute("for", "highPriority");
       highLabel.textContent = "High";
@@ -103,25 +118,24 @@ const EditTask = (() => {
       highBox.appendChild(highLabel);
       formGroup.appendChild(highBox);
 
+      formGroup.classList.add("pri-boxes")
 
-      return formGroup;;
+      return formGroup;
     }
 
     function _createSubmitBtn() {
       const btn = document.createElement("button");
+      const box = document.createElement("div");
       
       btn.setAttribute("type", "submit");
       btn.textContent = "Edit";
 
-      return btn;
+      box.appendChild(btn);
+      form.appendChild(box);
     }
 
     function _createSubmitBox() {
-      const box = document.createElement("div");
-      const submit = _createSubmitBtn();
-
-      box.appendChild(submit);
-      form.appendChild(box);
+    
     }
 
     function _renderForm() {
@@ -131,10 +145,12 @@ const EditTask = (() => {
       const priority = _createPriority();
       form.appendChild(taskName);
       form.appendChild(dueDate);
-      form.appendChild(taskNote);
+      noteBox.appendChild(taskNote);
+      form.appendChild(noteBox);
       form.appendChild(priority);
-      _createSubmitBox();
-      dom.appendChild(form);
+
+      _createSubmitBtn();
+      dom.appendChild(form)
     }
     
     _renderForm();

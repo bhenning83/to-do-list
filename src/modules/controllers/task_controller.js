@@ -25,7 +25,6 @@ const TaskController = (() => {
     let priority = "";
     
     radios.push(low, med, high)
-    console.log(radios)
     
     for (let i = 0; i < radios.length; i++) {
       if (radios[i].checked) {
@@ -75,13 +74,16 @@ const TaskController = (() => {
   }
 
   function editFormSubmit(form, obj) {
-    obj.name = form.newName.value;
-    obj.dueDate = form.newDueDate.value;
-    obj.note = form.newNote.value;
-    obj.priority = form.newNote.value;
+    obj.name =     form.querySelector(".task-name input").value;
+    obj.dueDate =  form.querySelector(".task-date input").value;
+    obj.note =     form.querySelector(".task-note textarea").value;
+    let low =      form.querySelector(".pri-boxes .pri-box:nth-of-type(1) input");
+    let med =      form.querySelector(".pri-boxes .pri-box:nth-of-type(2) input");
+    let high =     form.querySelector(".pri-boxes .pri-box:nth-of-type(3) input");
+    let radios = [];
     let priority = "";
     
-    const radios = document.getElementsByName("newPriority");
+    radios.push(low, med, high)
     
     for (let i = 0; i < radios.length; i++) {
       if (radios[i].checked) {
