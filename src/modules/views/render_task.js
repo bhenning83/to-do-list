@@ -4,6 +4,7 @@ import Task from "../task";
 const RenderTask = (() => {
 
   function render(obj) {
+    const row =              document.createElement("div");
     const taskBox =          document.createElement("div");
     const taskName =         document.createElement("div");
     const dueDate =          document.createElement("div");
@@ -11,12 +12,16 @@ const RenderTask = (() => {
     const nameDateCheckBox = document.createElement("div");
     const note =             document.createElement("div");
     const checkBox =         createCheckBox(obj);
-    const editBtn =          createEditBtn(obj, taskBox);
-    
+    const noteBtn =          createNoteBtn(note);
+
+    row.classList.add("row")
     taskBox.classList.add("task-box");
+    dueDate.classList.add("due-date-rendered");
+    dueDate.classList.add("ml-2");
     nameDateBox.classList.add("name-date-box");
     nameDateCheckBox.classList.add("name-date-check-box");
-    taskName.classList.add("mr-auto")
+    taskName.classList.add("mr-2");
+    taskName.classList.add("task-name-rendered");
     
     taskName.textContent = obj["name"];
     dueDate.textContent = obj["dueDate"];
@@ -24,10 +29,14 @@ const RenderTask = (() => {
 
     note.classList.add("task-note");
     note.classList.add("show-task-note");
-    
-    nameDateBox.addEventListener("click", (e) => {
+ 
+    taskName.addEventListener("click", (e) => {
       e.preventDefault();
-      note.classList.toggle("show-task-note");
+      TaskController.editTask(obj, taskBox)
+    });
+    dueDate.addEventListener("click", (e) => {
+      e.preventDefault();
+      TaskController.editTask(obj, taskBox)
     });
 
     switch (obj["priority"]) {
@@ -43,7 +52,7 @@ const RenderTask = (() => {
     }
 
     nameDateBox.appendChild(taskName);
-    nameDateBox.appendChild(editBtn);
+    if (obj["note"]) nameDateBox.appendChild(noteBtn);
     nameDateBox.appendChild(dueDate);
     nameDateCheckBox.appendChild(checkBox);
     nameDateCheckBox.appendChild(nameDateBox);
@@ -73,16 +82,16 @@ const RenderTask = (() => {
     return checkBox;
   }
 
-  function createEditBtn(obj, taskBox) {
+  function createNoteBtn(note) {
     const btn = document.createElement("i");
     btn.classList.add("fa");
-    btn.classList.add("fa-pencil-square-o");
-    btn.classList.add("mr-2");
+    btn.classList.add("fa-sticky-note-o");
+    btn.classList.add("mr-auto");
 
     btn.addEventListener("click", (e) => {
       e.preventDefault();
-      TaskController.editTask(obj, taskBox)
-    })
+      note.classList.toggle("show-task-note");
+    });
     return btn
   }
 

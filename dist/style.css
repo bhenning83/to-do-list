@@ -5,12 +5,10 @@
   --red-rose: #e71d36ff;
   --orange-peel: #ff9f1cff;
 }
-
 body {
   background: var(--black-root);
-  color: var(--white-root)
+  color: var(--white-root);
 }
-
 .add-task {
   border: 1px solid var(--white-root);
   border-radius: 5px;
@@ -78,4 +76,12 @@ body {
 }
 .high-box label {
   color: var(--red-rose);
+}
+.task-name-rendered {
+  /* overflow: wrap;
+  white-space: visible; */
+  width: 80%;
+}
+form {
+  padding: 15px;
 }

@@ -24,6 +24,7 @@ const EditTask = (() => {
       input.setAttribute("id", "newName");
       input.setAttribute("placeholder", "Edit Task Name");
       input.setAttribute("value", obj.name);
+      input.required = true;
       
       formGroup.classList.add("task-name");
       formGroup.appendChild(input);
@@ -49,6 +50,7 @@ const EditTask = (() => {
 
       tarea.setAttribute("placeholder", "Notes about task");
       tarea.setAttribute("form", "edit-form-" + obj.name);
+      tarea.value = obj.note;
       tarea.classList.add("w-100");
 
       formGroup.classList.add("task-note")

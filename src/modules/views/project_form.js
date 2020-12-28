@@ -4,10 +4,13 @@ const ProjectForm = (() => {
   
   function render() {
     const content =   document.getElementById("content");
+    const row =       document.createElement("div");
     const form =      document.createElement("form");
     const formGroup = document.createElement("div");
     const input =     document.createElement("input");
     const submit =    document.createElement("button");
+
+    row.classList.add("row");
 
     input.setAttribute("placeholder", "New Project");
     input.setAttribute("id", "new-project");
@@ -29,21 +32,31 @@ const ProjectForm = (() => {
       ProjectController.formSubmit(form);
     });
 
-    content.appendChild(form);
+    row.appendChild(form);
+
+    content.appendChild(row);
   }
 
   function edit(proj, projBox) {
+    const row =       document.createElement("div");
     const form =      document.createElement("form");
     const formGroup = document.createElement("div");
     const input =     document.createElement("input");
     const submit =    document.createElement("button");
 
+    row.classList.add("row");
+
     input.setAttribute("placeholder", "Edit Project Name");
     input.setAttribute("value", proj.name);
     input.setAttribute("id", "newName");
     input.setAttribute("type", "text");
+    input.classList.add("mr-3");
+
+    submit.setAttribute("type", "submit");
+    submit.textContent = "Edit";
 
     formGroup.appendChild(input);
+    formGroup.appendChild(submit)
 
     form.appendChild(formGroup);
 
@@ -52,7 +65,8 @@ const ProjectForm = (() => {
       ProjectController.editSubmit(form, proj);
     });
     
-    projBox.prepend(form);
+    row.appendChild(form)
+    projBox.prepend(row);
   }
 
   return { render, edit }

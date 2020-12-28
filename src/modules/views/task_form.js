@@ -25,6 +25,7 @@ const TaskForm = (() => {
       
       input.setAttribute("type", "text");
       input.setAttribute("placeholder", "Task Name");
+      input.required = true;
       
       formGroup.classList.add("task-name");
       formGroup.appendChild(input);
