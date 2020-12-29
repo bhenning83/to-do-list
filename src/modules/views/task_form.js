@@ -2,8 +2,9 @@ import ProjectController from "../controllers/project_controller";
 import TaskController from "../controllers/task_controller";
 
 const TaskForm = (() => {
-  function create(proj, idx) {
+  function create(proj) {
     const form = document.createElement("form");
+    const idx = proj.idx;
 
     const noteBox = document.createElement("div");
     noteBox.classList.add("col-12");
@@ -16,7 +17,7 @@ const TaskForm = (() => {
 
     form.addEventListener("submit", (e) => {
       e.preventDefault();
-      TaskController.formSubmit(form, idx);
+      TaskController.formSubmit(form);
     })
 
     function _createNameField() {
@@ -67,7 +68,7 @@ const TaskForm = (() => {
       const input = document.createElement("input");
       input.setAttribute("type", "hidden");
       input.setAttribute("id", "project" + idx);
-      input.setAttribute("value", proj["name"]);
+      input.setAttribute("value", idx);
 
       formGroup.classList.add("task-project");
       formGroup.appendChild(input);

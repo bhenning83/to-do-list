@@ -13,7 +13,7 @@ const TaskController = (() => {
 
   const allTasks = [task1, task2];
 
-  function createTask(form, idx) {
+  function createTask(form) {
     let name =    form.querySelector(".task-name input").value;
     let dueDate = form.querySelector(".task-date input").value;
     let note =    form.querySelector(".task-note textarea").value;
@@ -69,7 +69,6 @@ const TaskController = (() => {
   function editTask(obj, dom) {
     const nodes = dom.children;
     Clear.clearTask(nodes);
-    console.log(dom)
     EditTask.render(obj, dom);
   }
 

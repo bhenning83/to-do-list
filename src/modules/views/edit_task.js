@@ -1,6 +1,10 @@
-import TaskController from "../controllers/task_controller"
+import TaskController from "../controllers/task_controller";
+// import TaskForm from "./task_form";
+
 const EditTask = (() => {
   function render(obj, dom) {
+    // const form = TaskForm.create(obj.proj, obj.idx)
+    console.log(obj.project)
     const form = document.createElement("form");
 
     const noteBox = document.createElement("div");

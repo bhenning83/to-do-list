@@ -1,7 +1,5 @@
-import controller from "./controllers/task_controller"
-
-const Project = (name) => {
-  return { name }
+const Project = (name, idx) => {
+  return { name, idx }
 }
 
 
