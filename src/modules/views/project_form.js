@@ -12,6 +12,8 @@ const ProjectForm = (() => {
 
     row.classList.add("row");
 
+    form.classList.add("col-12")
+
     input.setAttribute("placeholder", "New Project");
     input.setAttribute("id", "new-project");
     input.setAttribute("type", "text");

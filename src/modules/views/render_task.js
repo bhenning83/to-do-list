@@ -5,38 +5,37 @@ const RenderTask = (() => {
 
   function render(obj) {
     const row =              document.createElement("div");
-    const taskBox =          document.createElement("div");
     const taskName =         document.createElement("div");
     const dueDate =          document.createElement("div");
-    const nameDateBox =      document.createElement("div");
-    const nameDateCheckBox = document.createElement("div");
     const note =             document.createElement("div");
     const checkBox =         createCheckBox(obj);
     const noteBtn =          createNoteBtn(note);
+    const checkNameNote =    document.createElement("div");
 
-    row.classList.add("row")
-    taskBox.classList.add("task-box");
-    dueDate.classList.add("due-date-rendered");
-    dueDate.classList.add("ml-2");
-    nameDateBox.classList.add("name-date-box");
-    nameDateCheckBox.classList.add("name-date-check-box");
-    taskName.classList.add("mr-2");
+    row.classList.add("row");
     taskName.classList.add("task-name-rendered");
+    taskName.classList.add("mx-2");
+    dueDate.classList.add("col-4");
+    dueDate.classList.add("text-right")
+    checkNameNote.classList.add("col-8");
+    checkNameNote.classList.add("d-flex");
+    checkNameNote.classList.add("align-items-center");
+    note.classList.add("col-8")
     
     taskName.textContent = obj["name"];
     dueDate.textContent = obj["dueDate"];
     note.textContent = obj["note"];
 
-    note.classList.add("task-note");
+    note.classList.add("render-task-note");
     note.classList.add("show-task-note");
  
     taskName.addEventListener("click", (e) => {
       e.preventDefault();
-      TaskController.editTask(obj, taskBox)
+      TaskController.editTask(obj, row)
     });
     dueDate.addEventListener("click", (e) => {
       e.preventDefault();
-      TaskController.editTask(obj, taskBox)
+      TaskController.editTask(obj, row)
     });
 
     switch (obj["priority"]) {
@@ -51,20 +50,19 @@ const RenderTask = (() => {
         break;
     }
 
-    nameDateBox.appendChild(taskName);
-    if (obj["note"]) nameDateBox.appendChild(noteBtn);
-    nameDateBox.appendChild(dueDate);
-    nameDateCheckBox.appendChild(checkBox);
-    nameDateCheckBox.appendChild(nameDateBox);
-    taskBox.appendChild(nameDateCheckBox);
-    taskBox.appendChild(note);
+    checkNameNote.appendChild(checkBox);
+    checkNameNote.appendChild(taskName);
+    if (obj["note"]) checkNameNote.appendChild(noteBtn);
+    row.appendChild(checkNameNote);
+    row.appendChild(dueDate);
+    row.appendChild(note);
 
-    return taskBox;
+    return row;
   }
 
   function createCheckBox(obj) {
-    const checkBox = document.createElement("div");
-    const checkMark =    document.createElement("div");
+    const checkBox =  document.createElement("div");
+    const checkMark = document.createElement("div");
 
     checkBox.classList.add("check-box");
     checkMark.classList.add("checkmark");

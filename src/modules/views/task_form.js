@@ -25,9 +25,12 @@ const TaskForm = (() => {
       
       input.setAttribute("type", "text");
       input.setAttribute("placeholder", "Task Name");
+      input.classList.add("w-100");
       input.required = true;
       
       formGroup.classList.add("task-name");
+      formGroup.classList.add("col-6");
+      formGroup.classList.add("pr-0");
       formGroup.appendChild(input);
       return formGroup;
     }
@@ -37,8 +40,11 @@ const TaskForm = (() => {
       const input = document.createElement("input");
 
       input.setAttribute("type", "date");
+      input.classList.add("w-100");
 
       formGroup.classList.add("task-date");
+      formGroup.classList.add("col-6");
+      formGroup.classList.add("pl-0");
       formGroup.appendChild(input);
       return formGroup;
     }
@@ -88,13 +94,15 @@ const TaskForm = (() => {
       medBox.classList.add("mx-3");
       highBox.classList.add("high-box");
       highBox.classList.add("pri-box");
-      formGroup.classList.add("d-flex")
+      formGroup.classList.add("d-flex");
+      formGroup.classList.add("col-9");
 
       low.setAttribute("type", "radio");
       low.setAttribute("name", "priority");
       low.setAttribute("value", "low");
       low.classList.add("priority" + idx);
       lowLabel.setAttribute("for", "lowPriority");
+      lowLabel.classList.add("ml-1");
       lowLabel.textContent = "Low";
 
       med.setAttribute("type", "radio");
@@ -102,6 +110,7 @@ const TaskForm = (() => {
       med.setAttribute("value", "med");
       med.classList.add("priority" + idx);
       medLabel.setAttribute("for", "medPriority");
+      medLabel.classList.add("ml-1");
       medLabel.textContent = "Medium";
 
       high.setAttribute("type", "radio");
@@ -109,6 +118,7 @@ const TaskForm = (() => {
       high.setAttribute("value", "high");
       high.classList.add("priority" + idx);
       highLabel.setAttribute("for", "highPriority");
+      highLabel.classList.add("ml-1");
       highLabel.textContent = "High";
 
       lowBox.appendChild(low);
