@@ -8,7 +8,7 @@ const ProjectController = (() => {
   //testing projects
   const project1 = Project("Free Spirited Tasks", 0);
   const allProjects = [project1];
-  let idx = 1;
+  let idx = 1; //Project 0 is the default starter project
 
   function createNewProject(form) {
     //prevents empty or leading white space submissions
@@ -39,7 +39,7 @@ const ProjectController = (() => {
     for (let i = 0; i < allProjects.length; i++) {
       const proj = allProjects[i];
       const allTasks = TaskController.getProjectTasks(proj.idx);
-      const taskForm = TaskController.makeTaskForm(proj);
+      const taskForm = TaskController.makeTaskForm(proj.idx);
       RenderProject.render(proj, allTasks, taskForm, i);
     }
   }

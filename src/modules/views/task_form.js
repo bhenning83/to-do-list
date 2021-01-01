@@ -2,9 +2,8 @@ import ProjectController from "../controllers/project_controller";
 import TaskController from "../controllers/task_controller";
 
 const TaskForm = (() => {
-  function create(proj) {
+  function create(idx) {
     const form = document.createElement("form");
-    const idx = proj.idx;
 
     const noteBox = document.createElement("div");
     noteBox.classList.add("col-12");
