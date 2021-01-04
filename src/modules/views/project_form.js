@@ -48,6 +48,8 @@ const ProjectForm = (() => {
 
     row.classList.add("row");
 
+    form.classList = "col-12";
+
     input.setAttribute("placeholder", "Edit Project Name");
     input.setAttribute("value", proj.name);
     input.setAttribute("id", "newName");
