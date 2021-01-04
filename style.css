@@ -74,3 +74,9 @@ body {
   overflow: wrap;
   white-space: visible;
 }
+.past-due {
+  color: var(--red-rose);
+}
+.task {
+  /* border-bottom: 1px solid var(--white-root); */
+}
