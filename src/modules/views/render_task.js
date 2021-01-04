@@ -1,5 +1,6 @@
 import TaskController from "../controllers/task_controller";
-import Task from "../task";
+import { formatRelative } from "date-fns";
+import { isPast } from "date-fns";
 
 const RenderTask = (() => {
 
@@ -13,19 +14,22 @@ const RenderTask = (() => {
     const checkNameNote =    document.createElement("div");
 
     row.classList.add("row");
+    row.classList.add("task")
+
     taskName.classList.add("task-name-rendered");
     taskName.classList.add("mx-2");
-    dueDate.classList.add("col-4");
-    dueDate.classList.add("text-right")
-    checkNameNote.classList.add("col-8");
+    taskName.textContent = obj["name"];
+
+    dueDate.classList.add("col-6");
+    dueDate.classList.add("text-right");
+    dueDate.textContent = formatDate(obj["dueDate"], dueDate);
+
+    checkNameNote.classList.add("col-6");
     checkNameNote.classList.add("d-flex");
     checkNameNote.classList.add("align-items-center");
-    note.classList.add("col-8")
-    
-    taskName.textContent = obj["name"];
-    dueDate.textContent = obj["dueDate"];
-    note.textContent = obj["note"];
 
+    note.classList.add("col-8")
+    note.textContent = obj["note"];
     note.classList.add("render-task-note");
     note.classList.add("show-task-note");
  
@@ -58,6 +62,24 @@ const RenderTask = (() => {
     row.appendChild(note);
 
     return row;
+  }
+
+  function formatDate(date, dueDate) {
+    let year = date.slice(0, 4);
+    let month = date.slice(5,7) - 1;
+    let day = date.slice(8, 10);
+    let result = ""
+    if (date) {
+        result = formatRelative(
+        new Date(year, month, day),
+        new Date()
+      )
+    }
+   
+    if (isPast(new Date(year, month, day))) {
+      dueDate.classList.add("past-due")
+    }
+    return result;
   }
 
   function createCheckBox(obj) {

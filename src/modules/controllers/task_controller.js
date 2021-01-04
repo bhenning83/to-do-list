@@ -7,11 +7,7 @@ import EditTask from "../views/edit_task"
 import ProjectForm from "../views/project_form";
 
 const TaskController = (() => {
-  //create test tasks
-  const task1 = Task("Task Name", "2020-12-20", "A note about the task", "low", "Project 1");
-  const task2 = Task("Task Name 2", "2020-12-20", "Another note about the task", "high", "Project 1");
-
-  const allTasks = [task1, task2];
+  const allTasks = [];
 
   function createTask(form) {
     let name =    form.querySelector(".task-name input").value;
@@ -54,6 +50,14 @@ const TaskController = (() => {
       }
     }
     return projTasks;
+  }
+
+  function delProjectTasks(proj) {
+    const tasks = getProjectTasks(proj);
+    for (let i = 0; i < tasks.length; i++) {
+      let idx = allTasks.indexOf(tasks[i]);
+      allTasks.splice(idx, 1);
+    }
   }
 
   function getAllTasks() {
@@ -101,7 +105,8 @@ const TaskController = (() => {
     formSubmit,
     taskCheckedOff,
     editTask,
-    editFormSubmit
+    editFormSubmit,
+    delProjectTasks
   }
 })();
 

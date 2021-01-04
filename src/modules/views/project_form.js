@@ -45,6 +45,7 @@ const ProjectForm = (() => {
     const formGroup = document.createElement("div");
     const input =     document.createElement("input");
     const submit =    document.createElement("button");
+    const del =       document.createElement("button");
 
     row.classList.add("row");
 
@@ -59,14 +60,22 @@ const ProjectForm = (() => {
     submit.setAttribute("type", "submit");
     submit.textContent = "Edit";
 
+    del.textContent = "Delete";
+
     formGroup.appendChild(input);
-    formGroup.appendChild(submit)
+    formGroup.appendChild(submit);
+    formGroup.appendChild(del);
 
     form.appendChild(formGroup);
 
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       ProjectController.editSubmit(form, proj);
+    });
+
+    del.addEventListener("click", (e) => {
+      e.preventDefault();
+      ProjectController.delProject(proj);
     });
     
     row.appendChild(form)

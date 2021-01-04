@@ -56,6 +56,16 @@ const ProjectController = (() => {
     renderAllProjects();
   }
 
+  function delProject(proj) {
+    const idx = allProjects.indexOf(proj);
+    allProjects.splice(idx, 1);
+
+    //deletes associated tasks
+    TaskController.delProjectTasks(proj);
+
+    renderAllProjects();
+  }
+
   return { 
     createNewProject, 
     getAllProjects, 
@@ -63,7 +73,8 @@ const ProjectController = (() => {
     createNewProjectForm, 
     formSubmit,
     editProject,
-    editSubmit
+    editSubmit,
+    delProject
    }
 })();
 
