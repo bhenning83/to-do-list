@@ -21,7 +21,8 @@ const ProjectController = (() => {
   }
 
   function createNewProjectForm() {
-    ProjectForm.render();
+    const form = ProjectForm.render();
+    return form
   }
 
   function formSubmit(form) {
@@ -36,12 +37,18 @@ const ProjectController = (() => {
 
   function renderAllProjects() {
     Clear.clearAllProjects();
+    const wrap = document.createElement("div");
+    wrap.setAttribute("id", "main-content-wrap");
+    wrap.classList.add("row");
+
     for (let i = 0; i < allProjects.length; i++) {
       const proj = allProjects[i];
       const allTasks = TaskController.getProjectTasks(proj.idx);
       const taskForm = TaskController.makeTaskForm(proj.idx);
-      RenderProject.render(proj, allTasks, taskForm, i);
+      const projBox = RenderProject.render(proj, allTasks, taskForm, i);
+      wrap.appendChild(projBox);
     }
+    return wrap;
   }
 
   function editProject(proj, dom) {

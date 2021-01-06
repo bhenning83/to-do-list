@@ -1,26 +1,27 @@
 import Task from "../task";
-import renderTask from "../views/render_task";
 import ProjectController from "./project_controller"
 import TaskForm from "../views/task_form"
 import Clear from "../views/clear";
 import EditTask from "../views/edit_task"
-import ProjectForm from "../views/project_form";
+import Home from "../views/home";
 
 const TaskController = (() => {
   const allTasks = [];
+  const taskMode = false;
 
   function createTask(form) {
     let name =    form.querySelector(".task-name input").value;
     let dueDate = form.querySelector(".task-date input").value;
     let note =    form.querySelector(".task-note textarea").value;
     let project = form.querySelector(".task-project input").value;
+    console.log(project)
     let low =     form.querySelector(".pri-boxes .pri-box:nth-of-type(1) input");
     let med =     form.querySelector(".pri-boxes .pri-box:nth-of-type(2) input");
     let high =    form.querySelector(".pri-boxes .pri-box:nth-of-type(3) input");
     let radios = [];
     let priority = "";
     
-    radios.push(low, med, high)
+    radios.push(low, med, high);
     
     for (let i = 0; i < radios.length; i++) {
       if (radios[i].checked) {
@@ -38,7 +39,8 @@ const TaskController = (() => {
 
   function formSubmit(form) {
     createTask(form);
-    ProjectController.renderAllProjects();
+    Clear.clearAll();
+    Home.render();
   }
 
   function getProjectTasks(project) {
@@ -106,7 +108,7 @@ const TaskController = (() => {
     taskCheckedOff,
     editTask,
     editFormSubmit,
-    delProjectTasks
+    delProjectTasks,
   }
 })();
 
