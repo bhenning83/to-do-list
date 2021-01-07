@@ -8,6 +8,7 @@ import Home from "../views/home";
 const TaskController = (() => {
   const allTasks = [];
   const taskMode = false;
+  let idx = 0;
 
   function createTask(form) {
     let name =    form.querySelector(".task-name input").value;
@@ -27,7 +28,7 @@ const TaskController = (() => {
         priority = radios[i].value;
       }
     }
-    let task = Task(name, dueDate, note, priority, project);
+    let task = Task(name, dueDate, note, priority, idx, project);
     allTasks.push(task);
   }
 
@@ -38,6 +39,7 @@ const TaskController = (() => {
 
   function formSubmit(form) {
     createTask(form);
+    idx++;
     Clear.clearAll();
     Home.render();
   }
