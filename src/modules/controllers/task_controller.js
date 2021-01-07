@@ -14,7 +14,6 @@ const TaskController = (() => {
     let dueDate = form.querySelector(".task-date input").value;
     let note =    form.querySelector(".task-note textarea").value;
     let project = form.querySelector(".task-project input").value;
-    console.log(project)
     let low =     form.querySelector(".pri-boxes .pri-box:nth-of-type(1) input");
     let med =     form.querySelector(".pri-boxes .pri-box:nth-of-type(2) input");
     let high =    form.querySelector(".pri-boxes .pri-box:nth-of-type(3) input");
@@ -96,7 +95,8 @@ const TaskController = (() => {
       }
     }
     obj.priority = priority;
-    ProjectController.renderAllProjects();
+    Clear.clearAll();
+    Home.render();
   }
 
   return { 
