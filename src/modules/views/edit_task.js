@@ -4,9 +4,12 @@ import TaskForm from "./task_form";
 const EditTask = (() => {
   function render(obj, dom) {
     const form = TaskForm.create(obj.proj);
+    const idx = obj.idx;
 
     form.classList.remove("new-task-form");
     form.classList.remove("order-undefined");
+    form.removeAttribute("id", "task-formundefined");
+    form.setAttribute("id", `form-${idx}`);
     dom.classList.remove("row");
 
     let name =    form.querySelector(".task-name input");
@@ -31,7 +34,17 @@ const EditTask = (() => {
     name.setAttribute("value", obj.name);
     dueDate.setAttribute("value", obj.dueDate);
     note.value = obj.note;
+    note.removeAttribute("form", "task-formundefined");
+    note.setAttribute("form", `form-${idx}`);
     btn.textContent = "Edit";
+    btn.removeEventListener("submit", (e) => {
+      e.preventDefault;
+      TaskController.formSubmit();
+    });
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      TaskController.editFormSubmit(form, obj);
+    })
 
     dom.prepend(form);
   }

@@ -9,6 +9,9 @@ body {
   background: var(--black-root);
   color: var(--white-root);
 }
+header {
+  border-bottom: 1px solid var(--white-root);
+}
 .add-task {
   border: 1px solid var(--white-root);
   border-radius: 5px;
@@ -16,7 +19,6 @@ body {
   text-align: center;
   line-height: 19px;
   height: 1.5rem;
-  margin: .5rem 0;
 }
 .new-task-form {
   display: none;
@@ -77,6 +79,10 @@ body {
 .past-due {
   color: var(--red-rose);
 }
-.task {
-  /* border-bottom: 1px solid var(--white-root); */
+.fa-list-ul {
+  background: transparent;
+  color: var(--white-root);
+  border: none;
+  height: 25px;
+  width: 50px;
 }

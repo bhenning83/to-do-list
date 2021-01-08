@@ -3,16 +3,12 @@ import ProjectController from "../controllers/project_controller";
 const ProjectForm = (() => {
   
   function render() {
-    const content =   document.getElementById("content");
-    const row =       document.createElement("div");
     const form =      document.createElement("form");
     const formGroup = document.createElement("div");
     const input =     document.createElement("input");
     const submit =    document.createElement("button");
 
-    row.classList.add("row");
-
-    form.classList.add("col-12")
+    form.classList.add("col-auto")
 
     input.setAttribute("placeholder", "New Project");
     input.setAttribute("id", "new-project");
@@ -34,9 +30,7 @@ const ProjectForm = (() => {
       ProjectController.formSubmit(form);
     });
 
-    row.appendChild(form);
-
-    content.appendChild(row);
+    return form;
   }
 
   function edit(proj, projBox) {
@@ -49,7 +43,7 @@ const ProjectForm = (() => {
 
     row.classList.add("row");
 
-    form.classList = "col-12";
+    form.classList = "col-9";
 
     input.setAttribute("placeholder", "Edit Project Name");
     input.setAttribute("value", proj.name);

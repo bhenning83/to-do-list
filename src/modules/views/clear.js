@@ -1,6 +1,6 @@
 const Clear = (() => {
   function clearAllProjects() {
-    let projects = document.querySelectorAll(".project-box");
+    const projects = document.querySelectorAll(".project-box");
     for (let i = 0; i < projects.length; i++) {
       projects[i].remove();
     }
@@ -15,11 +15,19 @@ const Clear = (() => {
      nodes[i].remove();
    }
   }
+
+  function clearAll() {
+    const leadForm = document.querySelector(".leading-form");
+    const mainWrap =  document.querySelector("#main-content-wrap");
+    leadForm.remove();
+    mainWrap.remove();
+  }
   
   return { 
     clearAllProjects, 
     clearProject, 
-    clearTask 
+    clearTask,
+    clearAll
   }
 })();
 

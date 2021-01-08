@@ -9,6 +9,9 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "eslint": "^7.17.0",
     "webpack": "^5.10.1",
     "webpack-cli": "^4.2.0"
   },

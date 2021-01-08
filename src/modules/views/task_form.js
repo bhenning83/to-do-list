@@ -1,4 +1,3 @@
-import ProjectController from "../controllers/project_controller";
 import TaskController from "../controllers/task_controller";
 
 const TaskForm = (() => {
@@ -172,8 +171,20 @@ const TaskForm = (() => {
 
     return form;
   }
+
+  function newTaskButton(taskForm) {
+    const newTask = document.createElement("div");
+    newTask.textContent = "+";
+    newTask.classList.add("add-task");
+    newTask.classList.add("my-2");
+    newTask.addEventListener("click", (e) => {
+      e.preventDefault();
+      taskForm.classList.toggle("new-task-form");
+    })
+    return newTask;
+  }
   
-  return { create }
+  return { create, newTaskButton }
 })();
 
 export default TaskForm;

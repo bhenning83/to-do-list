@@ -65,9 +65,9 @@ const RenderTask = (() => {
   }
 
   function formatDate(date, dueDate) {
-    let year = date.slice(0, 4);
-    let month = date.slice(5,7) - 1;
-    let day = date.slice(8, 10);
+    const year = date.slice(0, 4);
+    const month = date.slice(5,7) - 1;
+    const day = date.slice(8, 10);
     let result = ""
     if (date) {
         result = formatRelative(
@@ -115,7 +115,22 @@ const RenderTask = (() => {
     return btn
   }
 
-  return { render }
+  function allTasks() {
+    const allTasks = TaskController.getAllTasks();
+    const wrap = document.createElement("div");
+    const h4 = document.createElement("h4");
+    h4.textContent = "All Tasks"
+    wrap.setAttribute("id", "main-content-wrap");
+    wrap.appendChild(h4);
+
+    allTasks.forEach(task => {
+      let box = RenderTask.render(task);
+      wrap.appendChild(box);
+    })
+    return wrap;
+  }
+
+  return { render, allTasks }
 })();
 
 export default RenderTask

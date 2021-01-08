@@ -1,19 +1,14 @@
 import ProjectController from "../controllers/project_controller";
 import RenderTask from "./render_task";
+import TaskForm from "./task_form"
 
 
 const RenderProject = (() => {
-  const content = document.getElementById("content");
-  const row = document.createElement("div");
-  row.setAttribute("id", "all-proj-box")
-  
   function render(proj, allTasks, taskForm, idx) {
     const projBox = document.createElement("div");
     const projName = document.createElement("h4");
-    const newTask = document.createElement("div");
+    const newTask = TaskForm.newTaskButton(taskForm);
     
-    row.classList.add("row");
-
     projName.textContent = proj.name;
     
     projBox.classList.add("project-box");
@@ -23,12 +18,6 @@ const RenderProject = (() => {
     projBox.classList.add("projBox-" + idx);
     projBox.appendChild(projName);
     
-    newTask.textContent = "+";
-    newTask.classList.add("add-task");
-    newTask.addEventListener("click", (e) => {
-      taskForm.classList.toggle("new-task-form");
-    })
-
     for (let i = 0; i < allTasks.length; i++) {
       const taskBox = RenderTask.render(allTasks[i]);
       projBox.appendChild(taskBox);
@@ -43,9 +32,7 @@ const RenderProject = (() => {
 
     projBox.appendChild(taskForm);
 
-    row.appendChild(projBox);
-
-    content.appendChild(row);
+    return projBox;
   }
 
   return { render }

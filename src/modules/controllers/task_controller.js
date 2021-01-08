@@ -4,12 +4,13 @@ import TaskForm from "../views/task_form"
 import Clear from "../views/clear";
 import EditTask from "../views/edit_task"
 import Home from "../views/home";
+import { storageAvailable, getTaskIdx, loadTasks } from "../local_storage"
+
 
 const TaskController = (() => {
-  const allTasks = [];
-  const taskMode = false;
-  let idx = 0;
-
+  const allTasks = loadTasks();
+  let idx = (getTaskIdx() == 0) ? 0 : getTaskIdx() + 1;
+  
   function createTask(form) {
     let name =    form.querySelector(".task-name input").value;
     let dueDate = form.querySelector(".task-date input").value;
@@ -30,6 +31,13 @@ const TaskController = (() => {
     }
     let task = Task(name, dueDate, note, priority, idx, project);
     allTasks.push(task);
+    if (storageAvailable("localStorage")) {
+      localStorage.setItem("task-" + idx, JSON.stringify(task));
+      localStorage.setItem("taskidx", JSON.stringify(idx));
+    }
+    else {
+      // Too bad, no localStorage for us
+    }
   }
 
   function makeTaskForm(proj, idx) {
