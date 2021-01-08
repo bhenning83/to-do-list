@@ -58,15 +58,17 @@ const ProjectController = (() => {
   }
 
   function editProject(proj, dom) {
-    let projBox = dom.parentNode;
+    const projBox = dom.parentNode;
     Clear.clearProject(dom);
     ProjectForm.edit(proj, projBox);
   }
 
   function editSubmit(form, proj) {
-    let newName = form.newName.value;
+    const newName = form.newName.value;
     proj.name = newName;
-    renderAllProjects();
+    localStorage.setItem("project-" + proj.idx, JSON.stringify(proj));
+    Clear.clearAll();
+    Home.render();
   }
 
   function delProject(proj) {
@@ -77,7 +79,7 @@ const ProjectController = (() => {
     TaskController.delProjectTasks(proj);
 
     localStorage.removeItem("project-" + proj.idx);
-
+    Clear.clearAll();
     Home.render();
   }
 

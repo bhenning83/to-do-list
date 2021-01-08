@@ -107,6 +107,7 @@ const TaskController = (() => {
       }
     }
     obj.priority = priority;
+    localStorage.setItem("task-" + obj.idx, JSON.stringify(obj));
     Clear.clearAll();
     Home.render();
   }
