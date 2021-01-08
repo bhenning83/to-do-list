@@ -76,6 +76,8 @@ const ProjectController = (() => {
     //deletes associated tasks
     TaskController.delProjectTasks(proj);
 
+    localStorage.removeItem("project-" + proj.idx);
+
     Home.render();
   }
 

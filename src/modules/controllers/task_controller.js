@@ -78,7 +78,9 @@ const TaskController = (() => {
   function taskCheckedOff(task) {
     const idx = allTasks.indexOf(task);
     allTasks.splice(idx, 1); //removes task from task list
-    ProjectController.renderAllProjects();
+    localStorage.removeItem("task-" + task.idx);
+    Clear.clearAll();
+    Home.render();
   }
  
   function editTask(obj, dom) {
