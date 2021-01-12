@@ -8,12 +8,12 @@ const ProjectForm = (() => {
     const input =     document.createElement("input");
     const submit =    document.createElement("button");
 
-    form.classList.add("col-auto")
+    form.classList.add("col-auto");
 
     input.setAttribute("placeholder", "New Project");
     input.setAttribute("id", "new-project");
     input.setAttribute("type", "text");
-    input.classList.add("mr-3")
+    input.classList.add("mr-3");
 
     submit.setAttribute("type", "submit");
     submit.textContent = "Create";
@@ -21,7 +21,7 @@ const ProjectForm = (() => {
     formGroup.classList.add("d-flex");
 
     formGroup.appendChild(input);
-    formGroup.appendChild(submit)
+    formGroup.appendChild(submit);
 
     form.appendChild(formGroup);
 
@@ -42,6 +42,7 @@ const ProjectForm = (() => {
     const del =       document.createElement("button");
 
     row.classList.add("row");
+    row.classList.add("edit-proj")
 
     form.classList = "col-9";
 
