@@ -22,6 +22,7 @@ header {
   text-align: center;
   line-height: 19px;
   height: 1.5rem;
+  cursor: pointer;
 }
 .new-task-form {
   display: none;
@@ -35,6 +36,7 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 .checkmark {
   position: absolute;
@@ -91,4 +93,7 @@ header {
 }
 h4 {
   border-bottom: 1px solid var(--white-root);
+}
+.fa-sticky-note-o {
+  cursor: pointer;
 }

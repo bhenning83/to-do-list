@@ -1,5 +1,4 @@
 import Task from "../task";
-import ProjectController from "./project_controller"
 import TaskForm from "../views/task_form"
 import Clear from "../views/clear";
 import EditTask from "../views/edit_task"
@@ -34,9 +33,6 @@ const TaskController = (() => {
     if (storageAvailable("localStorage")) {
       localStorage.setItem("task-" + idx, JSON.stringify(task));
       localStorage.setItem("taskidx", JSON.stringify(idx));
-    }
-    else {
-      // Too bad, no localStorage for us
     }
   }
 

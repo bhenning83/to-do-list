@@ -52,6 +52,7 @@ const ProjectForm = (() => {
     input.classList.add("mr-3");
 
     submit.setAttribute("type", "submit");
+    submit.classList.add("mr-3");
     submit.textContent = "Edit";
 
     del.textContent = "Delete";

@@ -118,7 +118,10 @@ const RenderTask = (() => {
   }
 
   function allTasks() {
-    const allTasks = TaskController.getAllTasks();
+    let allTasks = TaskController.getAllTasks();
+    allTasks.sort(function(a, b) {
+      return new Date(a.dueDate) - new Date(b.dueDate);
+    })
     const wrap = document.createElement("div");
     wrap.setAttribute("id", "main-content-wrap");
     const h4 = document.createElement("h4");
