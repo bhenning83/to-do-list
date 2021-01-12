@@ -8,7 +8,15 @@ const RenderProject = (() => {
     const projBox = document.createElement("div");
     const projName = document.createElement("h4");
     const newTask = TaskForm.newTaskButton(taskForm);
-    
+
+    allTasks.sort(function(a, b) {
+      //pushes tasks without dueDates to bottom
+      if (b.dueDate == "") return -1;
+
+      //sorts tasks with dueDates
+      return new Date(a.dueDate) - new Date(b.dueDate);
+    })
+
     projName.textContent = proj.name;
     
     projBox.classList.add("project-box");
