@@ -38,7 +38,7 @@ const TaskForm = (() => {
       const formGroup = document.createElement("div");
       const input = document.createElement("input");
 
-      input.setAttribute("type", "date");
+      input.setAttribute("type", "datetime-local");
       input.classList.add("w-100");
 
       formGroup.classList.add("task-date");
@@ -145,8 +145,8 @@ const TaskForm = (() => {
     }
 
     function _renderForm() {
-      const dueDate = _createDueDate();
       const taskName = _createNameField();
+      const dueDate = _createDueDate();
       const taskNote = _createNoteArea();
       const project = _createProjectField();
       const priority = _createPriority();

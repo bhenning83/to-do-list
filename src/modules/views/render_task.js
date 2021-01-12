@@ -5,13 +5,13 @@ import { isPast } from "date-fns";
 const RenderTask = (() => {
 
   function render(obj) {
-    const row =              document.createElement("div");
-    const taskName =         document.createElement("div");
-    const dueDate =          document.createElement("div");
-    const note =             document.createElement("div");
-    const checkBox =         createCheckBox(obj);
-    const noteBtn =          createNoteBtn(note);
-    const checkNameNote =    document.createElement("div");
+    const row =           document.createElement("div");
+    const taskName =      document.createElement("div");
+    const dueDate =       document.createElement("div");
+    const note =          document.createElement("div");
+    const checkBox =      createCheckBox(obj);
+    const noteBtn =       createNoteBtn(note);
+    const checkNameNote = document.createElement("div");
 
     row.classList.add("row");
     row.classList.add("task")
@@ -68,15 +68,17 @@ const RenderTask = (() => {
     const year = date.slice(0, 4);
     const month = date.slice(5,7) - 1;
     const day = date.slice(8, 10);
+    const hour = date.slice(11, 13);
+    const min = date.slice(14, 16);
     let result = ""
     if (date) {
         result = formatRelative(
-        new Date(year, month, day),
+        new Date(year, month, day, hour, min),
         new Date()
       )
     }
    
-    if (isPast(new Date(year, month, day))) {
+    if (isPast(new Date(year, month, day, hour, min))) {
       dueDate.classList.add("past-due")
     }
     return result;
@@ -118,11 +120,10 @@ const RenderTask = (() => {
   function allTasks() {
     const allTasks = TaskController.getAllTasks();
     const wrap = document.createElement("div");
+    wrap.setAttribute("id", "main-content-wrap");
     const h4 = document.createElement("h4");
     h4.textContent = "All Tasks"
-    wrap.setAttribute("id", "main-content-wrap");
     wrap.appendChild(h4);
-
     allTasks.forEach(task => {
       let box = RenderTask.render(task);
       wrap.appendChild(box);

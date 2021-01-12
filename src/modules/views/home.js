@@ -17,6 +17,8 @@ const Home = (() => {
     row.classList.add("row");
     row.classList.add("align-items-center");
     row.classList.add("leading-form");
+    row.classList.add("mt-3");
+    btn.classList.add("ml-auto");
     row.appendChild(form);
     row.appendChild(btn);
     // localStorage.clear();
@@ -35,7 +37,8 @@ const Home = (() => {
     row.classList.add("row");
     row.classList.add("align-items-center")
     row.classList.add("leading-form");
-    taskBtnBox.classList.add("mr-auto");
+    row.classList.add("mt-3");
+    btn.classList.add("ml-auto")
     taskBtnBox.classList.add("col-auto");
     newTaskBtn.classList.remove("my-2");
     taskBtnBox.appendChild(newTaskBtn);
