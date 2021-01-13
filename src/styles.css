@@ -1,6 +1,6 @@
 :root {
   --black-root: #011627ff;
-  --white-root: #fdfffcff;
+  --white-root: hsl(100, 100%, 99%);
   --blue-tiffany: #2ec4b6ff;
   --red-rose: #e71d36ff;
   --orange-peel: #ff9f1cff;
@@ -26,6 +26,12 @@ header {
 }
 .new-task-form {
   display: none;
+}
+.task {
+  border: 1px solid hsla(100, 100%, 99%, 60%);
+  border-radius: 5px;
+  margin: 15px 0;
+  padding: 5px 0;
 }
 .check-box {
   width: 1rem;
@@ -103,4 +109,20 @@ h4 {
 }
 input[type=text], textarea {
   padding-left: 5px;
+}
+.proj-form {
+  display: flex;
+  align-items: center;
+}
+.leading-form {
+  align-items: center;
+}
+@media only screen and (max-width: 430px) {
+  .proj-form {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  .leading-form {
+    align-items: flex-start;
+  }
 }

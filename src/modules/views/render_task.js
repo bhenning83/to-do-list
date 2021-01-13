@@ -125,7 +125,8 @@ const RenderTask = (() => {
     const wrap = document.createElement("div");
     wrap.setAttribute("id", "main-content-wrap");
     const h4 = document.createElement("h4");
-    h4.textContent = "All Tasks"
+    h4.textContent = "All Tasks";
+    h4.classList.add("mt-2");
     wrap.appendChild(h4);
     allTasks.forEach(task => {
       let box = RenderTask.render(task);

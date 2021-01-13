@@ -15,7 +15,6 @@ const Home = (() => {
     const btn = AltView.button(mode);
     const projects = ProjectController.renderAllProjects();
     row.classList.add("row");
-    row.classList.add("align-items-center");
     row.classList.add("leading-form");
     row.classList.add("mt-3");
     btn.classList.add("ml-auto");

@@ -16,9 +16,12 @@ const ProjectForm = (() => {
     input.classList.add("mr-3");
 
     submit.setAttribute("type", "submit");
+    submit.style.maxWidth = "65px";
+    submit.style.marginRight = "16px";
+    submit.style.marginTop = "5px";
     submit.textContent = "Create";
 
-    formGroup.classList.add("d-flex");
+    formGroup.classList.add("proj-form");
 
     formGroup.appendChild(input);
     formGroup.appendChild(submit);
@@ -44,7 +47,7 @@ const ProjectForm = (() => {
     row.classList.add("row");
     row.classList.add("edit-proj")
 
-    form.classList = "col-9";
+    form.classList = "col-auto";
 
     input.setAttribute("placeholder", "Edit Project Name");
     input.setAttribute("value", proj.name);
