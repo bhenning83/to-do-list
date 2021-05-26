@@ -39,6 +39,7 @@ const TaskForm = (() => {
       const input = document.createElement("input");
 
       input.setAttribute("type", "datetime-local");
+      input.setAttribute("placeholder", "mm/dd/yyyy")
       input.classList.add("w-100");
 
       formGroup.classList.add("task-date");
