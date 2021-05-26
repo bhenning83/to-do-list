@@ -15,6 +15,9 @@ body {
 header {
   border-bottom: 1px solid var(--white-root);
 }
+button[text='Create'] {
+  -webkit-appearance: none;
+}
 .add-task {
   border: 1px solid var(--white-root);
   border-radius: 5px;
@@ -23,6 +26,9 @@ header {
   line-height: 19px;
   height: 1.5rem;
   cursor: pointer;
+}
+.task-date input {
+  min-height: 30px;
 }
 .new-task-form {
   display: none;
