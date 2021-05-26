@@ -14,12 +14,13 @@ const ProjectForm = (() => {
     input.setAttribute("id", "new-project");
     input.setAttribute("type", "text");
     input.classList.add("mr-3");
-
+    
     submit.setAttribute("type", "submit");
     submit.style.maxWidth = "65px";
     submit.style.marginRight = "16px";
     submit.style.marginTop = "5px";
     submit.textContent = "Create";
+    submit.classList.add("create-btn");
 
     formGroup.classList.add("proj-form");
 
