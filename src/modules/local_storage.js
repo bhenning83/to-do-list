@@ -38,7 +38,7 @@ function loadTasks() {
 function loadProjects() {
   let idx = getProjectIdx();
   let projects = [];
-  const proj1 = Project("Free Spirited Tasks", 0);
+  const proj1 = Project("Miscellaneous", 0);
   projects.push(proj1)
   for (let i = 0; i <= idx; i++) {
     let project = JSON.parse(localStorage.getItem("project-" + i));
